@@ -3,6 +3,9 @@ const app = express()
 const cors = require('cors')
 require('dotenv').config()
 const mongoose = require('mongoose')
+const routes = require('./routes')
+const session = require('express-session')
+const passport = require('./config/passport')
 
 const PORT = process.env.PORT || 5000
 
@@ -10,6 +13,20 @@ const PORT = process.env.PORT || 5000
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
+
+// Use sessions to keep track of user's login status
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+  })
+)
+app.use(passport.initialize())
+app.use(passport.session())
+
+// API routes
+app.use(routes)
 
 // Connect to DB
 mongoose.connect(
@@ -22,6 +39,14 @@ mongoose.connect(
     console.log('Connected to DB!')
   }
 )
+
+// Handle production
+if (process.env.NODE_ENV === 'production') {
+  // Static folder
+  app.use(express.static(__dirname + '/public'))
+  // Handle SPA
+  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'))
+}
 
 // Start API server
 app.listen(PORT, function () {
