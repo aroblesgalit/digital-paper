@@ -25,5 +25,15 @@ module.exports = {
     req.session.destroy(function (err) {
       res.json({})
     })
+  },
+  fetchAuthUser: function (req, res) {
+    if (!req.user) {
+      res.status(401).json({})
+    } else {
+      res.json({
+        id: req.user.id,
+        username: req.user.username
+      })
+    }
   }
 }
