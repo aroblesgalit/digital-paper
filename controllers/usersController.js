@@ -13,5 +13,11 @@ module.exports = {
         })
       )
       .catch(err => res.status(401).json(err))
+  },
+  loginUser: function (req, res) {
+    res.json({
+      id: req.user._id,
+      username: req.user.username
+    })
   }
 }
