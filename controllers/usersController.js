@@ -19,5 +19,11 @@ module.exports = {
       id: req.user._id,
       username: req.user.username
     })
+  },
+  logoutUser: function (req, res) {
+    req.logout()
+    req.session.destroy(function (err) {
+      res.json({})
+    })
   }
 }
