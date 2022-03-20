@@ -5,7 +5,7 @@
       <div>
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
+            <router-link class="nav-link" to="/register">Register</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Login</a>
