@@ -39,5 +39,10 @@ export default createStore({
       }
     }
   },
-  modules: {}
+  modules: {},
+  getters: {
+    isAuthenticated (state) {
+      return Object.keys(state.user).length === 0 ? false : true
+    }
+  }
 })
