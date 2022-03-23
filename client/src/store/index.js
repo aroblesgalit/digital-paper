@@ -6,7 +6,7 @@ export default createStore({
   plugins: [createdPersistedState()],
   state: {
     registration: null,
-    user: null
+    user: {}
   },
   mutations: {
     SET_REGS: (state, payload) => (state.registration = payload),
@@ -36,6 +36,14 @@ export default createStore({
       } catch (err) {
         console.error(err)
         commit('SET_USER', {})
+      }
+    },
+    async logoutUser ({ commit }) {
+      try {
+        await axios.get('http://localhost:5000/api/user/logout')
+        commit('SET_USER', {})
+      } catch (err) {
+        console.error(err)
       }
     }
   },
