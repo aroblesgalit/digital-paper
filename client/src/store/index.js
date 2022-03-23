@@ -31,7 +31,6 @@ export default createStore({
           'http://localhost:5000/api/user/login',
           data
         )
-        console.log(response.data)
         commit('SET_USER', response.data)
       } catch (err) {
         console.error(err)
