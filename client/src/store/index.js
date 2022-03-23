@@ -5,7 +5,7 @@ import axios from 'axios'
 export default createStore({
   plugins: [createdPersistedState()],
   state: {
-    registration: ''
+    registration: null
   },
   mutations: {
     SET_REGS: (state, payload) => (state.registration = payload)
