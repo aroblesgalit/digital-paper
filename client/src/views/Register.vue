@@ -41,7 +41,10 @@
         </form>
       </div>
     </div>
-    <p>Already have an account? Log in here</p>
+    <p>
+      Already have an account?
+      <router-link to="/login">Log in here</router-link>
+    </p>
   </div>
 </template>
 

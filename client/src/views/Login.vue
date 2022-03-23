@@ -30,7 +30,10 @@
         </form>
       </div>
     </div>
-    <p>Don't have an account? Register here</p>
+    <p>
+      Don't have an account?
+      <router-link to="/register">Register here</router-link>
+    </p>
   </div>
 </template>
 
