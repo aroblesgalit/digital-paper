@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
@@ -47,9 +49,14 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['loginUser']),
     async formSubmit () {
       try {
-        console.log(this.username, this.password)
+        await this.loginUser({
+          username: this.username,
+          password: this.password
+        })
+        await this.$router.push({ name: 'Home' })
       } catch (err) {
         console.error(err)
       }
