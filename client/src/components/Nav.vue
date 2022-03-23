@@ -8,7 +8,13 @@
             <router-link class="nav-link" to="/register">Register</router-link>
           </li>
           <li class="nav-item">
-            <a v-if="isAuthenticated" class="nav-link" href="#">Logout</a>
+            <a
+              v-if="isAuthenticated"
+              @click="handleLogout"
+              class="nav-link"
+              href="#"
+              >Logout</a
+            >
             <router-link v-else class="nav-link" to="/login">Login</router-link>
           </li>
         </ul>
@@ -18,10 +24,21 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Nav',
+  methods: {
+    ...mapActions(['logoutUser']),
+    async handleLogout () {
+      try {
+        await this.logoutUser()
+        await this.$router.push({ name: 'Login' })
+      } catch (err) {
+        console.error(err)
+      }
+    }
+  },
   computed: {
     ...mapGetters(['isAuthenticated'])
   }
