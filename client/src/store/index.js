@@ -41,6 +41,7 @@ export default createStore({
       try {
         await axios.get('http://localhost:5000/api/user/logout')
         commit('SET_USER', {})
+        commit('SET_REGS', '')
       } catch (err) {
         console.error(err)
       }
