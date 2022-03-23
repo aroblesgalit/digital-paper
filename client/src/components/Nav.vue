@@ -4,11 +4,12 @@
       <router-link class="navbar-brand" to="/">Digital Paper</router-link>
       <div>
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
+          <li v-if="!isAuthenticated" class="nav-item">
             <router-link class="nav-link" to="/register">Register</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/login">Login</router-link>
+            <a v-if="isAuthenticated" class="nav-link" href="#">Logout</a>
+            <router-link v-else class="nav-link" to="/login">Login</router-link>
           </li>
         </ul>
       </div>
@@ -17,8 +18,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'Nav'
+  name: 'Nav',
+  computed: {
+    ...mapGetters(['isAuthenticated'])
+  }
 }
 </script>
 
