@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('user')
 
 export default {
   name: 'Home',
