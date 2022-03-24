@@ -7,6 +7,12 @@
           <li v-if="!isAuthenticated" class="nav-item">
             <router-link class="nav-link" to="/register">Register</router-link>
           </li>
+          <li v-if="isAuthenticated" class="nav-item">
+            <router-link class="nav-link" to="/">Dashboard</router-link>
+          </li>
+          <li v-if="isAuthenticated" class="nav-item">
+            <router-link class="nav-link" to="/">Favorites</router-link>
+          </li>
           <li class="nav-item">
             <a
               v-if="isAuthenticated"
