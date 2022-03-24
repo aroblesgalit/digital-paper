@@ -2,8 +2,7 @@ import { createStore } from 'vuex'
 import createdPersistedState from 'vuex-persistedstate'
 import axios from 'axios'
 
-export default createStore({
-  plugins: [createdPersistedState()],
+const userModule = {
   state: {
     registration: null,
     user: {}
@@ -47,10 +46,16 @@ export default createStore({
       }
     }
   },
-  modules: {},
   getters: {
     isAuthenticated (state) {
       return Object.keys(state.user).length === 0 ? false : true
     }
+  }
+}
+
+export default createStore({
+  plugins: [createdPersistedState()],
+  modules: {
+    user: userModule
   }
 })
