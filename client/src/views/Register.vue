@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapActions, mapState } = createNamespacedHelpers('user')
 
 export default {
   name: 'Register',
