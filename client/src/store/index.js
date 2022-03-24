@@ -3,6 +3,7 @@ import createdPersistedState from 'vuex-persistedstate'
 import axios from 'axios'
 
 const userModule = {
+  namespaced: true,
   state: {
     registration: null,
     user: {}
