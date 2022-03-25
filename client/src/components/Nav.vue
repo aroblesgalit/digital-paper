@@ -8,7 +8,9 @@
             <router-link class="nav-link" to="/register">Register</router-link>
           </li>
           <li v-if="isAuthenticated" class="nav-item">
-            <router-link class="nav-link" to="/">Dashboard</router-link>
+            <router-link class="nav-link" to="/dashboard"
+              >Dashboard</router-link
+            >
           </li>
           <li v-if="isAuthenticated" class="nav-item">
             <router-link class="nav-link" to="/">Favorites</router-link>
