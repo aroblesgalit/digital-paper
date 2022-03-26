@@ -25,8 +25,12 @@
         faucibus. In in blandit arcu, et pellentesque tortor.
       </p>
     </div>
-    <div class="card-footer">
+    <div class="card-footer d-flex justify-content-between">
       <a href="#" class="card-link">Read more</a>
+      <div class="d-flex">
+        <div class="me-4"><i class="bi bi-heart"> 24</i></div>
+        <div><i class="bi bi-chat"> 7</i></div>
+      </div>
     </div>
   </div>
 </template>
