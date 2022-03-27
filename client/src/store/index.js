@@ -54,9 +54,31 @@ const userModule = {
   }
 }
 
+const postModule = {
+  namespaced: true,
+  state: {
+    posts: []
+  },
+  mutations: {
+    SET_POSTS: (state, payload) => (state.posts = payload)
+  },
+  actions: {
+    async createPost ({ commit }, data) {
+      try {
+        console.log(data)
+        commit('SET_POSTS', data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  },
+  getters: {}
+}
+
 export default createStore({
   plugins: [createdPersistedState()],
   modules: {
-    user: userModule
+    user: userModule,
+    post: postModule
   }
 })
