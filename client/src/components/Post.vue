@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card-header d-flex">
+    <div class="header card-body d-flex">
       <div class="me-3">
         <img src="https://via.placeholder.com/60" alt="" />
       </div>
@@ -9,7 +9,7 @@
         <span>1d</span>
       </div>
     </div>
-    <div class="card-body">
+    <div class="body card-body">
       <h5 class="card-title">Post title</h5>
       <p class="card-text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non quam
@@ -25,11 +25,11 @@
         faucibus. In in blandit arcu, et pellentesque tortor.
       </p>
     </div>
-    <div class="card-footer d-flex justify-content-between">
+    <div class="footer card-body d-flex justify-content-between">
       <a href="#" class="card-link">Read more</a>
       <div class="d-flex">
-        <div class="me-4"><i class="bi bi-heart"> 24</i></div>
-        <div><i class="bi bi-chat"> 7</i></div>
+        <div class="me-4"><span class="bi bi-heart"> 24</span></div>
+        <div><span class="bi bi-chat"> 7</span></div>
       </div>
     </div>
   </div>
@@ -45,5 +45,29 @@ export default {
 .card {
   width: 450px;
   max-width: 90vw;
+}
+.card .header img {
+  border-radius: 50%;
+}
+.card .header p {
+  font-size: 18px;
+  font-weight: 600;
+}
+.card .header span {
+  font-size: 12px;
+}
+.card .body h5 {
+  font-weight: bold;
+}
+.card .body p {
+  font-size: 14px;
+}
+.card .footer a {
+  font-size: 14px;
+  font-weight: bold;
+  color: #4a94eb;
+}
+.card .footer span {
+  font-size: 14px;
 }
 </style>
