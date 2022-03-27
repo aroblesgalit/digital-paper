@@ -22,7 +22,9 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="createPost">Modal title</h5>
+                <h5 class="modal-title text-center" id="createPost">
+                  Create a post
+                </h5>
                 <button
                   type="button"
                   class="btn-close"
@@ -31,19 +33,63 @@
                 ></button>
               </div>
               <div class="modal-body">
-                Woohoo, you're reading this text in a modal!
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Save changes
-                </button>
+                <form class="row g-3">
+                  <div class="col-12">
+                    <label for="inputTitle" class="form-label">Title</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputTitle"
+                      placeholder="Title"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputCategory" class="form-label"
+                      >Category</label
+                    >
+                    <select id="inputCategory" class="form-select">
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputImage" class="form-label">Image</label>
+                    <input type="text" class="form-control" id="inputImage" />
+                  </div>
+                  <div class="col-12">
+                    <label for="inputBody" class="form-label">Body</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputBody"
+                      placeholder="Body"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="publicCheck"
+                      />
+                      <label class="form-check-label" for="publicCheck">
+                        Make public
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12 d-flex justify-content-end">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary me-3"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                      Create
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -140,5 +186,11 @@ span {
 }
 tbody > tr:hover span {
   visibility: visible;
+}
+.modal form label {
+  font-size: 12px;
+}
+.modal-header h5 {
+  width: 100%;
 }
 </style>
