@@ -41,4 +41,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.card {
+  width: 450px;
+  max-width: 90vw;
+}
+</style>
