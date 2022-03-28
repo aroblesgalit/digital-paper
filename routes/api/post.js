@@ -5,8 +5,10 @@ const postsController = require('../../controllers/postsController')
 router
   .route('/')
   .get(postsController.getPublicPosts)
-  .get(postsController.getUserPosts)
   .post(postsController.createPost)
+
+// Match with '/api/posts/user/:id'
+router.route('/user/:id').get(postsController.getUserPosts)
 
 // Match with '/api/posts/:id'
 router
