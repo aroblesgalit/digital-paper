@@ -73,6 +73,17 @@ const postModule = {
       } catch (err) {
         console.log(err)
       }
+    },
+    async getUserPosts ({ commit }, id) {
+      try {
+        const userPosts = await axios.get(
+          'http://localhost:5000/api/posts/user/' + id
+        )
+        console.log(userPosts.data)
+        commit('SET_USER_POSTS', userPosts.data)
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   getters: {}
