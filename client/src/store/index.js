@@ -57,10 +57,12 @@ const userModule = {
 const postModule = {
   namespaced: true,
   state: {
-    publicPosts: []
+    publicPosts: [],
+    userPosts: []
   },
   mutations: {
-    SET_PUBLIC_POSTS: (state, payload) => (state.publicPosts = payload)
+    SET_PUBLIC_POSTS: (state, payload) => (state.publicPosts = payload),
+    SET_USER_POSTS: (state, payload) => (state.userPosts = payload)
   },
   actions: {
     async getPublicPosts ({ commit }) {
@@ -68,14 +70,6 @@ const postModule = {
         const publicPosts = await axios.get('http://localhost:5000/api/posts')
         console.log(publicPosts.data)
         commit('SET_PUBLIC_POSTS', publicPosts.data)
-      } catch (err) {
-        console.log(err)
-      }
-    },
-    async createPost ({ commit }, data) {
-      try {
-        console.log(data)
-        commit('SET_POSTS', data)
       } catch (err) {
         console.log(err)
       }

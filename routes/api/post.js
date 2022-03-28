@@ -5,6 +5,7 @@ const postsController = require('../../controllers/postsController')
 router
   .route('/')
   .get(postsController.getPublicPosts)
+  .get(postsController.getUserPosts)
   .post(postsController.createPost)
 
 // Match with '/api/posts/:id'
