@@ -2,8 +2,8 @@ const db = require('../models')
 
 // Define methods for posts
 module.exports = {
-  getAllPosts: function (req, res) {
-    db.Post.find({})
+  getPublicPosts: function (req, res) {
+    db.Post.find({ public: true })
       .sort({ created_on: 1 })
       .then(dbModels => res.json(dbModels))
       .catch(err => res.status(422).json(err))

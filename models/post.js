@@ -40,7 +40,10 @@ const postSchema = new Schema({
         ref: 'User'
       }
     }
-  ]
+  ],
+  public: {
+    type: Boolean
+  }
 })
 
 const Post = mongoose.model('Post', postSchema)
