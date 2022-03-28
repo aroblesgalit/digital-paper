@@ -25,7 +25,8 @@ const postSchema = new Schema({
     ref: 'User'
   },
   likes: {
-    type: Number
+    type: Number,
+    default: 0
   },
   comments: [
     {
