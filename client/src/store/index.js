@@ -74,10 +74,11 @@ const postModule = {
         console.log(err)
       }
     },
-    async getUserPosts ({ commit }, id) {
+    async getUserPosts ({ commit }, data) {
       try {
         const userPosts = await axios.get(
-          'http://localhost:5000/api/posts/user/' + id
+          'http://localhost:5000/api/posts/user',
+          data
         )
         console.log(userPosts.data)
         commit('SET_USER_POSTS', userPosts.data)

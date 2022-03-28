@@ -14,9 +14,11 @@ export default {
   name: 'Home',
   components: { Post },
   methods: {
-    ...mapActions(['getPublicPosts']),
-    fetch () {
-      this.getPublicPosts()
+    ...mapActions(['getUserPosts']),
+    async fetch () {
+      await this.getUserPosts({
+        id: '6235727a53f932c232da9a9a'
+      })
     }
   },
   computed: {
