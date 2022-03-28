@@ -24,10 +24,6 @@ const postSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
   likes: {
     type: Number
   },
@@ -41,10 +37,6 @@ const postSchema = new Schema({
       commenter: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-      },
-      postedAt: {
-        type: Date,
-        default: Date.now
       }
     }
   ]
