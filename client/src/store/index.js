@@ -68,7 +68,6 @@ const postModule = {
     async getPublicPosts ({ commit }) {
       try {
         const publicPosts = await axios.get('http://localhost:5000/api/posts')
-        console.log(publicPosts.data)
         commit('SET_PUBLIC_POSTS', publicPosts.data)
       } catch (err) {
         console.log(err)
@@ -79,8 +78,21 @@ const postModule = {
         const userPosts = await axios.get(
           'http://localhost:5000/api/posts/user/' + data.id
         )
-        console.log(userPosts.data)
         commit('SET_USER_POSTS', userPosts.data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async createPost ({ commit }, data) {
+      try {
+        const newPost = await axios.post(
+          'http://localhost:5000/api/posts',
+          data
+        )
+        let userPosts = [newPost, ...this.userPosts]
+        let publicPosts = [newPost, ...this.publicPosts]
+        commit('SET_USER_POSTS', userPosts)
+        commit('SET_PUBLIC_POSTS', publicPosts)
       } catch (err) {
         console.log(err)
       }

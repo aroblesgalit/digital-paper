@@ -14,11 +14,8 @@ export default {
   name: 'Home',
   components: { Post },
   methods: {
-    ...postModule.mapActions(['getUserPosts', 'getPublicPosts']),
+    ...postModule.mapActions(['getPublicPosts']),
     async fetch () {
-      await this.getUserPosts({
-        id: '6235727a53f932c232da9a9a'
-      })
       await this.getPublicPosts()
     }
   },
