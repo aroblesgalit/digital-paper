@@ -97,7 +97,7 @@
       </div>
 
       <div class="card-body">
-        <TablePosts />
+        <TablePosts :posts="userPosts" />
       </div>
     </div>
   </div>
@@ -124,6 +124,9 @@ export default {
     } catch (err) {
       console.error(err)
     }
+  },
+  computed: {
+    ...postModule.mapState(['userPosts'])
   }
 }
 </script>
