@@ -7,8 +7,8 @@ router
   .get(postsController.getPublicPosts)
   .post(postsController.createPost)
 
-// Match with '/api/posts/user'
-router.route('/user').get(postsController.getUserPosts)
+// Match with '/api/posts/user/:id'
+router.route('/user/:id').get(postsController.getUserPosts)
 
 // Match with '/api/posts/:id'
 router

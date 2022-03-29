@@ -9,7 +9,7 @@ module.exports = {
       .catch(err => res.status(422).json(err))
   },
   getUserPosts: function (req, res) {
-    db.Post.find({ author: req.body.id })
+    db.Post.find({ author: req.params.id })
       .sort({ createdAt: 1 })
       .then(dbModels => res.json(dbModels))
       .catch(err => res.status(422).json(err))
