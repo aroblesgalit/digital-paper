@@ -80,7 +80,7 @@ const postModule = {
           'http://localhost:5000/api/posts/user',
           data
         )
-        console.log(userPosts)
+        console.log(userPosts.data)
         commit('SET_USER_POSTS', userPosts.data)
       } catch (err) {
         console.log(err)
