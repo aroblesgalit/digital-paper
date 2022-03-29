@@ -105,11 +105,25 @@
 
 <script>
 import TablePosts from '../components/TablePosts.vue'
+import { createNamespacedHelpers } from 'vuex'
+const postModule = createNamespacedHelpers('post')
 
 export default {
   name: 'Dashboard',
   components: {
     TablePosts
+  },
+  methods: {
+    ...postModule.mapActions(['getUserPosts'])
+  },
+  async created () {
+    try {
+      await this.getUserPosts({
+        id: '6235727a53f932c232da9a9a'
+      })
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 </script>

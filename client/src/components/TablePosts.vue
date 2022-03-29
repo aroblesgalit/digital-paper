@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <TablePostItem v-for="item in post" :key="item._id" :post="item" />
+      <TablePostItem v-for="item in posts" :key="item._id" :post="item" />
       <tr>
         <td scope="row">Dreams</td>
         <td>03/18/22</td>
@@ -74,7 +74,7 @@ export default {
     TablePostItem
   },
   props: {
-    post: Object
+    posts: Object
   }
 }
 </script>
