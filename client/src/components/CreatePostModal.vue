@@ -24,6 +24,7 @@
             <div class="col-12">
               <label for="inputTitle" class="form-label">Title</label>
               <input
+                v-model="title"
                 type="text"
                 class="form-control"
                 id="inputTitle"
@@ -32,18 +33,26 @@
             </div>
             <div class="col-md-6">
               <label for="inputCategory" class="form-label">Category</label>
-              <select id="inputCategory" class="form-select">
-                <option selected>Choose...</option>
-                <option>...</option>
+              <select v-model="category" id="inputCategory" class="form-select">
+                <option disabled value="">Choose...</option>
+                <option>poetry</option>
+                <option>story</option>
+                <option>journal</option>
               </select>
             </div>
             <div class="col-md-6">
               <label for="inputImage" class="form-label">Image</label>
-              <input type="text" class="form-control" id="inputImage" />
+              <input
+                v-model="image"
+                type="text"
+                class="form-control"
+                id="inputImage"
+              />
             </div>
             <div class="col-12">
               <label for="inputBody" class="form-label">Body</label>
               <input
+                v-model="body"
                 type="text"
                 class="form-control"
                 id="inputBody"
@@ -53,6 +62,7 @@
             <div class="col-12">
               <div class="form-check">
                 <input
+                  v-model="isPublic"
                   class="form-check-input"
                   type="checkbox"
                   id="publicCheck"
@@ -83,7 +93,17 @@
 
 <script>
 export default {
-  name: 'CreatePostModal'
+  name: 'CreatePostModal',
+  data () {
+    return {
+      category: '',
+      title: '',
+      body: '',
+      image: '',
+      author: '',
+      isPublic: null
+    }
+  }
 }
 </script>
 
