@@ -10,6 +10,7 @@
       </tr>
     </thead>
     <tbody>
+      <TablePostItem v-for="item in post" :key="item._id" :post="item" />
       <tr>
         <td scope="row">Dreams</td>
         <td>03/18/22</td>
@@ -65,8 +66,16 @@
 </template>
 
 <script>
+import TablePostItem from './TablePostItem.vue'
+
 export default {
-  name: 'TablePosts'
+  name: 'TablePosts',
+  components: {
+    TablePostItem
+  },
+  props: {
+    post: Object
+  }
 }
 </script>
 
