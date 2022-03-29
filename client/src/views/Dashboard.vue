@@ -136,17 +136,6 @@ export default {
   width: 1000px;
   max-width: 90vw;
 }
-table thead {
-  font-size: 12px;
-  color: #666;
-}
-span {
-  visibility: hidden;
-  cursor: pointer;
-}
-tbody > tr:hover span {
-  visibility: visible;
-}
 .modal form label {
   font-size: 12px;
 }

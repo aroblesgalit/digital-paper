@@ -33,4 +33,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+span {
+  visibility: hidden;
+  cursor: pointer;
+}
+tbody > tr:hover span {
+  visibility: visible;
+}
+</style>
