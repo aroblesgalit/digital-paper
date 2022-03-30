@@ -6,16 +6,32 @@
     <td>{{ numOfComments }}</td>
     <td>
       <span class="bi bi-pencil me-3"></span>
-      <span class="bi bi-trash3"></span>
+      <span @click="onDelete(post._id)" class="bi bi-trash3"></span>
     </td>
   </tr>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const postModule = createNamespacedHelpers('post')
+
 export default {
   name: 'TablePostItem',
   props: {
     post: Object
+  },
+  methods: {
+    ...postModule.mapActions(['deletePost']),
+    async onDelete (id) {
+      try {
+        console.log(id)
+        await this.deletePost({
+          id: id
+        })
+      } catch (err) {
+        console.error(err)
+      }
+    }
   },
   computed: {
     formattedDate () {
