@@ -19,15 +19,13 @@ export default {
   async created () {
     try {
       await this.getPublicPosts()
-      console.log(this.publicPostsWithUsername)
     } catch (err) {
       console.error(err)
     }
   },
   computed: {
     ...userModule.mapGetters(['isAuthenticated']),
-    ...postModule.mapState(['publicPosts']),
-    ...postModule.mapGetters(['publicPostsWithUsername'])
+    ...postModule.mapState(['publicPosts'])
   }
 }
 </script>

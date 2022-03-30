@@ -46,12 +46,12 @@ const userModule = {
         console.error(err)
       }
     },
-    getUserById (id) {
+    getUserById (context, id) {
       return new Promise((resolve, reject) => {
         axios
           .get('http://localhost:5000/api/user/' + id)
           .then(res => {
-            resolve(res.data)
+            resolve(res)
           })
           .catch(err => reject(err))
       })
@@ -75,9 +75,24 @@ const postModule = {
     SET_USER_POSTS: (state, payload) => (state.userPosts = payload)
   },
   actions: {
-    async getPublicPosts ({ commit }) {
+    async getPublicPosts ({ commit, dispatch }) {
       try {
         const publicPosts = await axios.get('http://localhost:5000/api/posts')
+        // const demo = await dispatch(
+        //   'user/getUserById',
+        //   publicPosts.data[0].author,
+        //   {
+        //     root: true
+        //   }
+        // )
+        // console.log(demo.data.username)
+        await publicPosts.data.map(async post => {
+          const result = await dispatch('user/getUserById', post.author, {
+            root: true
+          })
+          post.authorName = result.data.username
+        })
+        console.log(publicPosts.data)
         commit('SET_PUBLIC_POSTS', publicPosts.data)
       } catch (err) {
         console.log(err)
@@ -118,21 +133,7 @@ const postModule = {
       }
     }
   },
-  getters: {
-    publicPostsWithUsername (state) {
-      let updatedPosts = []
-
-      state.publicPosts.map(post => {
-        axios
-          .get('http://localhost:5000/api/user/' + post.author)
-          .then(result => {
-            let newPost = { ...post, authorName: result.data.username }
-            updatedPosts.push(newPost)
-          })
-      })
-      return updatedPosts
-    }
-  }
+  getters: {}
 }
 
 export default createStore({
