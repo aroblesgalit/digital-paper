@@ -108,7 +108,18 @@ const postModule = {
       }
     }
   },
-  getters: {}
+  getters: {
+    publicPostsWithUsername (state) {
+      const updatedPosts = state.publicPosts.map(async post => {
+        const result = await axios.get(
+          'http://localhost:5000/api/user/' + post.author
+        )
+        let newPost = { ...post, authorName: result.data.username }
+        return newPost
+      })
+      return Promise.all(updatedPosts)
+    }
+  }
 }
 
 export default createStore({
