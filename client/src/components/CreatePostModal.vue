@@ -20,7 +20,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form class="row g-3">
+          <form @submit.prevent="formSubmit" class="row g-3">
             <div class="col-12">
               <label for="inputTitle" class="form-label">Title</label>
               <input
@@ -29,11 +29,17 @@
                 class="form-control"
                 id="inputTitle"
                 placeholder="Title"
+                required
               />
             </div>
             <div class="col-md-6">
               <label for="inputCategory" class="form-label">Category</label>
-              <select v-model="category" id="inputCategory" class="form-select">
+              <select
+                v-model="category"
+                id="inputCategory"
+                class="form-select"
+                required
+              >
                 <option disabled value="">Choose...</option>
                 <option>poetry</option>
                 <option>story</option>
@@ -57,16 +63,13 @@
                 class="form-control"
                 id="inputBody"
                 placeholder="Body"
+                required
               />
             </div>
             <div class="col-12">
               <div class="form-check">
-                <input
-                  v-model="isPublic"
-                  class="form-check-input"
-                  type="checkbox"
-                  id="publicCheck"
-                />
+                <input v-model="isPublic" class="form-check-input"
+                type="checkbox" id="isPublicCheck" value= />
                 <label class="form-check-label" for="publicCheck">
                   Make public
                 </label>
@@ -92,6 +95,10 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const userModule = createNamespacedHelpers('user')
+const postModule = createNamespacedHelpers('post')
+
 export default {
   name: 'CreatePostModal',
   data () {
@@ -101,8 +108,29 @@ export default {
       body: '',
       image: '',
       author: '',
-      isPublic: null
+      isPublic: false
     }
+  },
+  methods: {
+    ...postModule.mapActions(['createPost']),
+    async formSubmit () {
+      try {
+        const data = {
+          category: this.category,
+          title: this.title,
+          body: this.body,
+          image: this.image,
+          author: this.user.id,
+          isPublic: this.isPublic
+        }
+        await this.createPost(data)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+  },
+  computed: {
+    ...userModule.mapState(['user'])
   }
 }
 </script>

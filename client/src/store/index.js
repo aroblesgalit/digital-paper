@@ -89,12 +89,23 @@ const postModule = {
           'http://localhost:5000/api/posts',
           data
         )
-        let userPosts = [newPost, ...this.userPosts]
-        let publicPosts = [newPost, ...this.publicPosts]
+        let userPosts = [newPost.data, ...this.userPosts]
+        // let publicPosts = [newPost.data, ...this.publicPosts]
         commit('SET_USER_POSTS', userPosts)
-        commit('SET_PUBLIC_POSTS', publicPosts)
+        // commit('SET_PUBLIC_POSTS', publicPosts)
       } catch (err) {
         console.log(err)
+      }
+    },
+    async deletePost ({ commit }, data) {
+      try {
+        await axios.delete('http://localhost:5000/api/posts/' + data.id)
+        let userPosts = [...this.userPosts]
+        let index = userPosts.findIndex(post => post._id === data.id)
+        userPosts.splice(index, 1)
+        commit('SET_USER_POSTS', userPosts)
+      } catch (err) {
+        console.error(err)
       }
     }
   },
