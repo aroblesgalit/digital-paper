@@ -39,13 +39,12 @@ export default {
     formattedTime () {
       let datePosted = new Date(this.post.createdAt)
       let dateNow = new Date()
-
+      let difference = dateNow - datePosted
       if (
         datePosted.getMonth() === dateNow.getMonth() &&
         datePosted.getDate() === dateNow.getDate() &&
         datePosted.getFullYear() === dateNow.getFullYear()
       ) {
-        let difference = dateNow - datePosted
         let seconds = Math.floor((difference / 1000) % 60)
         let minutes = Math.floor((difference / (1000 * 60)) % 60)
         let hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
@@ -56,8 +55,11 @@ export default {
         } else {
           return hours + 'h'
         }
+      } else if (Math.floor(difference / (1000 * 60 * 60 * 24)) < 1) {
+        let hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
+        return hours + 'h'
       } else {
-        return 'Posted day(s) ago!'
+        return Math.floor(difference / (1000 * 60 * 60 * 24)) + 'd'
       }
     }
   }
