@@ -45,6 +45,16 @@ const userModule = {
       } catch (err) {
         console.error(err)
       }
+    },
+    getUserById (id) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get('http://localhost:5000/api/user/' + id)
+          .then(res => {
+            resolve(res.data)
+          })
+          .catch(err => reject(err))
+      })
     }
   },
   getters: {
@@ -110,14 +120,17 @@ const postModule = {
   },
   getters: {
     publicPostsWithUsername (state) {
-      const updatedPosts = state.publicPosts.map(async post => {
-        const result = await axios.get(
-          'http://localhost:5000/api/user/' + post.author
-        )
-        let newPost = { ...post, authorName: result.data.username }
-        return newPost
+      let updatedPosts = []
+
+      state.publicPosts.map(post => {
+        axios
+          .get('http://localhost:5000/api/user/' + post.author)
+          .then(result => {
+            let newPost = { ...post, authorName: result.data.username }
+            updatedPosts.push(newPost)
+          })
       })
-      return Promise.all(updatedPosts)
+      return updatedPosts
     }
   }
 }

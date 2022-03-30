@@ -19,8 +19,7 @@ export default {
   async created () {
     try {
       await this.getPublicPosts()
-      const posts = await this.publicPostsWithUsername
-      console.log(posts)
+      console.log(this.publicPostsWithUsername)
     } catch (err) {
       console.error(err)
     }
