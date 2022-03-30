@@ -94,10 +94,10 @@ const postModule = {
         console.log(err)
       }
     },
-    async deletePost ({ commit }, data) {
+    async deletePost ({ commit, state }, data) {
       try {
         await axios.delete('http://localhost:5000/api/posts/' + data.id)
-        let userPosts = [...this.userPosts]
+        let userPosts = [state.userPosts]
         let index = userPosts.findIndex(post => post._id === data.id)
         userPosts.splice(index, 1)
         commit('SET_USER_POSTS', userPosts)
