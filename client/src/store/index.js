@@ -83,16 +83,13 @@ const postModule = {
         console.log(err)
       }
     },
-    async createPost ({ commit }, data) {
+    async createPost ({ commit, state }, data) {
       try {
         const newPost = await axios.post(
           'http://localhost:5000/api/posts',
           data
         )
-        let userPosts = [newPost.data, ...this.userPosts]
-        // let publicPosts = [newPost.data, ...this.publicPosts]
-        commit('SET_USER_POSTS', userPosts)
-        // commit('SET_PUBLIC_POSTS', publicPosts)
+        commit('SET_USER_POSTS', [newPost.data, ...state.userPosts])
       } catch (err) {
         console.log(err)
       }
