@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column align-items-center">
-    <Post @click="fetch" />
+    <Post v-for="item in publicPosts" :key="item._id" :post="item" />
   </div>
 </template>
 
@@ -14,13 +14,18 @@ export default {
   name: 'Home',
   components: { Post },
   methods: {
-    ...postModule.mapActions(['getPublicPosts']),
-    async fetch () {
+    ...postModule.mapActions(['getPublicPosts'])
+  },
+  async created () {
+    try {
       await this.getPublicPosts()
+    } catch (err) {
+      console.error(err)
     }
   },
   computed: {
-    ...userModule.mapGetters(['isAuthenticated'])
+    ...userModule.mapGetters(['isAuthenticated']),
+    ...postModule.mapState(['publicPosts'])
   }
 }
 </script>
