@@ -10,6 +10,7 @@
       </div>
     </div>
     <div class="body card-body">
+      <span class="badge bg-secondary">{{ post.category }}</span>
       <h5 class="card-title">{{ post.title }}</h5>
       <p class="card-text">
         {{ post.body }}
@@ -72,6 +73,9 @@ export default {
   max-width: 90vw;
   margin-bottom: 16px;
 }
+.card .header {
+  padding-bottom: 0;
+}
 .card .header img {
   border-radius: 50%;
 }
@@ -87,6 +91,9 @@ export default {
 }
 .card .body p {
   font-size: 14px;
+}
+.card .footer {
+  padding-top: 0;
 }
 .card .footer a {
   font-size: 14px;

@@ -44,6 +44,7 @@
                 <option>poetry</option>
                 <option>story</option>
                 <option>journal</option>
+                <option>lyrics</option>
               </select>
             </div>
             <div class="col-md-6">
