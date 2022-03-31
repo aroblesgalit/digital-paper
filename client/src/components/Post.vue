@@ -12,12 +12,14 @@
     <div class="body card-body">
       <span class="badge bg-secondary">{{ post.category }}</span>
       <h5 class="card-title">{{ post.title }}</h5>
-      <p class="card-text less">
+      <p class="card-text" :class="[!readMore && 'less']">
         {{ post.body }}
       </p>
     </div>
     <div class="footer card-body d-flex justify-content-between">
-      <a href="#" class="card-link">Read more</a>
+      <p class="card-link" @click="readMore = !readMore">
+        {{ readMore ? 'Show less' : 'Read more' }}
+      </p>
       <div class="d-flex">
         <div class="me-4">
           <span class="bi bi-heart">&nbsp;{{ post.likes.length }}</span>
@@ -35,6 +37,11 @@ export default {
   name: 'Post',
   props: {
     post: Object
+  },
+  data () {
+    return {
+      readMore: false
+    }
   },
   computed: {
     formattedTime () {
@@ -104,10 +111,12 @@ export default {
 .card .footer {
   padding-top: 0;
 }
-.card .footer a {
+.card .footer p.card-link {
   font-size: 14px;
   font-weight: bold;
   color: #4a94eb;
+  text-decoration: underline;
+  cursor: pointer;
 }
 .card .footer span {
   font-size: 14px;
