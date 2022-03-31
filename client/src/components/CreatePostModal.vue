@@ -58,14 +58,13 @@
             </div>
             <div class="col-12">
               <label for="inputBody" class="form-label">Body</label>
-              <input
+              <textarea
                 v-model="body"
-                type="text"
                 class="form-control"
                 id="inputBody"
-                placeholder="Body"
+                placeholder="Start typing here..."
                 required
-              />
+              ></textarea>
             </div>
             <div class="col-12">
               <div class="form-check">
