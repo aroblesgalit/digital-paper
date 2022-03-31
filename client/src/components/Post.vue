@@ -19,7 +19,7 @@
       <a href="#" class="card-link">Read more</a>
       <div class="d-flex">
         <div class="me-4">
-          <span class="bi bi-heart">&nbsp;{{ post.likes }}</span>
+          <span class="bi bi-heart">&nbsp;{{ post.likes.length }}</span>
         </div>
         <div>
           <span class="bi bi-chat">&nbsp;{{ post.comments.length }}</span>
