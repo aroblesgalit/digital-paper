@@ -2,7 +2,7 @@
   <tr>
     <td scope="row">{{ post.title }}</td>
     <td>{{ formattedDate }}</td>
-    <td>{{ post.likes }}</td>
+    <td>{{ post.likes.length }}</td>
     <td>{{ numOfComments }}</td>
     <td>
       <span class="bi bi-pencil me-3"></span>
