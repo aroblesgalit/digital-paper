@@ -24,10 +24,11 @@ export default {
     ...postModule.mapActions(['deletePost']),
     async onDelete (id) {
       try {
-        console.log(id)
-        await this.deletePost({
-          id: id
-        })
+        if (confirm('Delete the post "' + this.post.title + '"?')) {
+          await this.deletePost({
+            id: id
+          })
+        }
       } catch (err) {
         console.error(err)
       }
