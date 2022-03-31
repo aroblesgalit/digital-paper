@@ -12,7 +12,7 @@
     <div class="body card-body">
       <span class="badge bg-secondary">{{ post.category }}</span>
       <h5 class="card-title">{{ post.title }}</h5>
-      <p class="card-text">
+      <p class="card-text less">
         {{ post.body }}
       </p>
     </div>
@@ -91,6 +91,15 @@ export default {
 }
 .card .body p {
   font-size: 14px;
+  white-space: pre-line;
+}
+.card .body p.less {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 .card .footer {
   padding-top: 0;
