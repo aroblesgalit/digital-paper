@@ -5,7 +5,7 @@
         <img src="https://via.placeholder.com/60" alt="" />
       </div>
       <div class="d-flex flex-column justify-content-center">
-        <p class="m-0">{{ post.author }}</p>
+        <p class="m-0">{{ post.authorName || post.author }}</p>
         <span>{{ formattedTime }}</span>
       </div>
     </div>

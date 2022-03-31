@@ -45,16 +45,6 @@ const userModule = {
       } catch (err) {
         console.error(err)
       }
-    },
-    getUserById (context, id) {
-      return new Promise((resolve, reject) => {
-        axios
-          .get('http://localhost:5000/api/user/' + id)
-          .then(res => {
-            resolve(res)
-          })
-          .catch(err => reject(err))
-      })
     }
   },
   getters: {
@@ -75,24 +65,9 @@ const postModule = {
     SET_USER_POSTS: (state, payload) => (state.userPosts = payload)
   },
   actions: {
-    async getPublicPosts ({ commit, dispatch }) {
+    async getPublicPosts ({ commit }) {
       try {
         const publicPosts = await axios.get('http://localhost:5000/api/posts')
-        // const demo = await dispatch(
-        //   'user/getUserById',
-        //   publicPosts.data[0].author,
-        //   {
-        //     root: true
-        //   }
-        // )
-        // console.log(demo.data.username)
-        await publicPosts.data.map(async post => {
-          const result = await dispatch('user/getUserById', post.author, {
-            root: true
-          })
-          post.authorName = result.data.username
-        })
-        console.log(publicPosts.data)
         commit('SET_PUBLIC_POSTS', publicPosts.data)
       } catch (err) {
         console.log(err)

@@ -4,6 +4,7 @@ const db = require('../models')
 module.exports = {
   getPublicPosts: function (req, res) {
     db.Post.find({ isPublic: true })
+      .populate({ path: 'author', select: '_id username' })
       .sort({ createdAt: -1 })
       .then(dbModels => res.json(dbModels))
       .catch(err => res.status(422).json(err))
