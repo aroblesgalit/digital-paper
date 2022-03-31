@@ -104,6 +104,20 @@ const postModule = {
       } catch (err) {
         console.error(err)
       }
+    },
+    async updatePost ({ commit, state }, data) {
+      try {
+        const updatedPost = await axios.put(
+          'http://localhost:5000/api/posts/' + data.id,
+          data
+        )
+        let userPosts = [...state.userPosts]
+        let index = userPosts.findIndex(post => post._id === data.id)
+        userPosts.splice(index, 1, updatedPost.data)
+        commit('SET_USER_POSTS', userPosts)
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   getters: {}
