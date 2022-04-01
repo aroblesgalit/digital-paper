@@ -16,7 +16,6 @@
 </template>
 
 <script>
-// import { CreatePostModal as EditPostModal } from './CreatePostModal.vue'
 import { createNamespacedHelpers } from 'vuex'
 const postModule = createNamespacedHelpers('post')
 
@@ -25,9 +24,7 @@ export default {
   props: {
     post: Object
   },
-  components: {
-    // EditPostModal
-  },
+  components: {},
   methods: {
     ...postModule.mapActions(['deletePost']),
     async onDelete (id) {

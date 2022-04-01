@@ -10,7 +10,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title text-center" id="createPost">
-            {{ type.toUpperCase() }} a post
+            Create a post
           </h5>
           <button
             type="button"
