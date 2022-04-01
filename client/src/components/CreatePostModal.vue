@@ -10,7 +10,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title text-center" id="createPost">
-            Create a post
+            {{ type.toUpperCase() }} a post
           </h5>
           <button
             type="button"
@@ -101,6 +101,9 @@ const postModule = createNamespacedHelpers('post')
 
 export default {
   name: 'CreatePostModal',
+  props: {
+    type: String
+  },
   data () {
     return {
       category: '',

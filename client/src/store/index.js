@@ -58,11 +58,13 @@ const postModule = {
   namespaced: true,
   state: {
     publicPosts: [],
-    userPosts: []
+    userPosts: [],
+    postModalType: ''
   },
   mutations: {
     SET_PUBLIC_POSTS: (state, payload) => (state.publicPosts = payload),
-    SET_USER_POSTS: (state, payload) => (state.userPosts = payload)
+    SET_USER_POSTS: (state, payload) => (state.userPosts = payload),
+    SET_POST_MODAL_TYPE: (state, payload) => (state.postModalType = payload)
   },
   actions: {
     async getPublicPosts ({ commit }) {
@@ -118,6 +120,9 @@ const postModule = {
       } catch (err) {
         console.error(err)
       }
+    },
+    setPostModalType ({ commit }, payload) {
+      commit('SET_POST_MODAL_TYPE', payload)
     }
   },
   getters: {}

@@ -5,13 +5,18 @@
     <td>{{ post.likes.length }}</td>
     <td>{{ numOfComments }}</td>
     <td>
-      <span class="bi bi-pencil me-3"></span>
+      <span
+        class="bi bi-pencil me-3"
+        data-bs-toggle="modal"
+        data-bs-target="#postModal"
+      ></span>
       <span @click="onDelete(post._id)" class="bi bi-trash3"></span>
     </td>
   </tr>
 </template>
 
 <script>
+// import { CreatePostModal as EditPostModal } from './CreatePostModal.vue'
 import { createNamespacedHelpers } from 'vuex'
 const postModule = createNamespacedHelpers('post')
 
@@ -19,6 +24,9 @@ export default {
   name: 'TablePostItem',
   props: {
     post: Object
+  },
+  components: {
+    // EditPostModal
   },
   methods: {
     ...postModule.mapActions(['deletePost']),

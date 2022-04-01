@@ -12,7 +12,7 @@
           Create
         </button>
         <!-- Modal -->
-        <CreatePostModal />
+        <CreatePostModal type="create" />
       </div>
 
       <div class="card-body">
