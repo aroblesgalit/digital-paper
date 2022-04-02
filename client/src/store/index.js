@@ -107,13 +107,13 @@ const postModule = {
         console.error(err)
       }
     },
-    async setPostToEdit (payload) {
+    async setPostToEdit ({ commit }, payload) {
       try {
         const result = await axios.get(
           'http://localhost:5000/api/posts/' + payload
         )
-        console.log(result)
-        // commit('SET_POST_TO_EDIT', payload)
+        console.log(result.data)
+        commit('SET_POST_TO_EDIT', result.data)
       } catch (err) {
         console.error(err)
       }

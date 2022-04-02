@@ -9,6 +9,7 @@
         class="bi bi-pencil me-3"
         data-bs-toggle="modal"
         data-bs-target="#editPostModal"
+        @click="setPostToEdit(post._id)"
       ></span>
       <EditPostModal :post="post" />
       <span @click="onDelete(post._id)" class="bi bi-trash3"></span>
