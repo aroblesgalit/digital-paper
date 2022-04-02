@@ -11,7 +11,7 @@
         data-bs-target="#editPostModal"
         @click="setPostToEdit(post._id)"
       ></span>
-      <EditPostModal :post="post" />
+      <EditPostModal />
       <span @click="onDelete(post._id)" class="bi bi-trash3"></span>
     </td>
   </tr>
