@@ -108,6 +108,7 @@ const postModule = {
       }
     },
     setPostToEdit ({ commit }, payload) {
+      // axios call to grab a post by its id
       commit('SET_POST_TO_EDIT', payload)
     },
     async updatePost ({ commit, state }, data) {

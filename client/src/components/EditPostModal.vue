@@ -22,9 +22,7 @@
         <div class="modal-body">
           <form @submit.prevent="formSubmit" class="row g-3">
             <div class="col-12">
-              <label for="inputTitle" class="form-label"
-                >Title: {{ post }}</label
-              >
+              <label for="inputTitle" class="form-label">Title:</label>
               <input
                 v-model="title"
                 type="text"
@@ -117,11 +115,11 @@ export default {
       isPublic: this.post.isPublic
     }
   },
+
   methods: {
     ...postModule.mapActions(['updatePost']),
     async formSubmit () {
       try {
-        console.log(this.post)
         const data = {
           id: this.id,
           category: this.category,
@@ -137,6 +135,7 @@ export default {
       }
     }
   },
+
   computed: {
     ...userModule.mapState(['user'])
   }

@@ -9,7 +9,6 @@
         class="bi bi-pencil me-3"
         data-bs-toggle="modal"
         data-bs-target="#editPostModal"
-        @click="printPost(post)"
       ></span>
       <EditPostModal :post="post" />
       <span @click="onDelete(post._id)" class="bi bi-trash3"></span>
@@ -24,12 +23,17 @@ const postModule = createNamespacedHelpers('post')
 
 export default {
   name: 'TablePostItem',
+  data () {
+    return {
+      // passedData: {}
+    }
+  },
   props: {
     post: Object
   },
   components: { EditPostModal },
   methods: {
-    ...postModule.mapActions(['deletePost']),
+    ...postModule.mapActions(['deletePost', 'setPostToEdit']),
     async onDelete (id) {
       try {
         if (confirm('Delete the post "' + this.post.title + '"?')) {
@@ -40,9 +44,6 @@ export default {
       } catch (err) {
         console.error(err)
       }
-    },
-    printPost (post) {
-      console.log(post)
     }
   },
   computed: {
