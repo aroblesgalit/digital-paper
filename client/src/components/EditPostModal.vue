@@ -1,15 +1,15 @@
 <template>
   <div
     class="modal fade"
-    id="postModal"
+    id="editPostModal"
     tabindex="-1"
-    aria-labelledby="createPost"
+    aria-labelledby="editPost"
     aria-hidden="true"
   >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title text-center" id="createPost">
+          <h5 class="modal-title text-center" id="editPost">
             Edit post
           </h5>
           <button
@@ -22,7 +22,9 @@
         <div class="modal-body">
           <form @submit.prevent="formSubmit" class="row g-3">
             <div class="col-12">
-              <label for="inputTitle" class="form-label">Title</label>
+              <label for="inputTitle" class="form-label"
+                >Title: {{ post }}</label
+              >
               <input
                 v-model="title"
                 type="text"
@@ -102,23 +104,26 @@ const postModule = createNamespacedHelpers('post')
 export default {
   name: 'CreatePostModal',
   props: {
-    type: String
+    post: Object
   },
   data () {
     return {
-      category: '',
-      title: '',
-      body: '',
-      image: '',
-      author: '',
-      isPublic: false
+      id: this.post._id,
+      category: this.post.category,
+      title: this.post.title,
+      body: this.post.body,
+      image: this.post.image,
+      author: this.post.author,
+      isPublic: this.post.isPublic
     }
   },
   methods: {
     ...postModule.mapActions(['updatePost']),
     async formSubmit () {
       try {
+        console.log(this.post)
         const data = {
+          id: this.id,
           category: this.category,
           title: this.title,
           body: this.body,
@@ -126,7 +131,7 @@ export default {
           author: this.user.id,
           isPublic: this.isPublic
         }
-        await this.update(data)
+        await this.updatePost(data)
       } catch (err) {
         console.error(err)
       }

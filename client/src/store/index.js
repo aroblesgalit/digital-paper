@@ -58,11 +58,13 @@ const postModule = {
   namespaced: true,
   state: {
     publicPosts: [],
-    userPosts: []
+    userPosts: [],
+    postToEdit: {}
   },
   mutations: {
     SET_PUBLIC_POSTS: (state, payload) => (state.publicPosts = payload),
-    SET_USER_POSTS: (state, payload) => (state.userPosts = payload)
+    SET_USER_POSTS: (state, payload) => (state.userPosts = payload),
+    SET_POST_TO_EDIT: (state, payload) => (state.postToEdit = payload)
   },
   actions: {
     async getPublicPosts ({ commit }) {
@@ -104,6 +106,9 @@ const postModule = {
       } catch (err) {
         console.error(err)
       }
+    },
+    setPostToEdit ({ commit }, payload) {
+      commit('SET_POST_TO_EDIT', payload)
     },
     async updatePost ({ commit, state }, data) {
       try {
