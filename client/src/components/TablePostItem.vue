@@ -5,20 +5,19 @@
     <td>{{ post.likes.length }}</td>
     <td>{{ numOfComments }}</td>
     <td>
-      <span
-        class="bi bi-pencil me-3"
-        data-bs-toggle="modal"
+      <span class="bi bi-pencil me-3" @click="setPostToEdit(post._id)"></span>
+      <!-- Inside span above
+      data-bs-toggle="modal"
         data-bs-target="#editPostModal"
-        @click="setPostToEdit(post._id)"
-      ></span>
-      <EditPostModal />
+       -->
+      <!-- <EditPostModal /> -->
       <span @click="onDelete(post._id)" class="bi bi-trash3"></span>
     </td>
   </tr>
 </template>
 
 <script>
-import EditPostModal from './EditPostModal.vue'
+// import EditPostModal from './EditPostModal.vue'
 import { createNamespacedHelpers } from 'vuex'
 const postModule = createNamespacedHelpers('post')
 
@@ -32,7 +31,7 @@ export default {
   props: {
     post: Object
   },
-  components: { EditPostModal },
+  // components: { EditPostModal },
   methods: {
     ...postModule.mapActions(['deletePost', 'setPostToEdit']),
     async onDelete (id) {
