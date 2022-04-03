@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
+import EditPost from '../views/EditPost.vue'
 import store from '../store'
 
 const routes = [
@@ -31,6 +32,14 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+    meta: {
+      authRequired: true
+    }
+  },
+  {
+    path: '/post/:id',
+    name: 'EditPost',
+    component: EditPost,
     meta: {
       authRequired: true
     }
