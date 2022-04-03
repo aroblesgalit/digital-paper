@@ -112,7 +112,6 @@ const postModule = {
         const result = await axios.get(
           'http://localhost:5000/api/posts/' + payload
         )
-        console.log(result.data)
         commit('SET_POST_TO_EDIT', result.data)
       } catch (err) {
         console.error(err)

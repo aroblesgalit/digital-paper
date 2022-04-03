@@ -5,7 +5,7 @@
     <td>{{ post.likes.length }}</td>
     <td>{{ numOfComments }}</td>
     <td>
-      <span class="bi bi-pencil me-3" @click="setPostToEdit(post._id)"></span>
+      <span class="bi bi-pencil me-3" @click="onEdit(post._id)"></span>
       <!-- Inside span above
       data-bs-toggle="modal"
         data-bs-target="#editPostModal"
@@ -41,6 +41,14 @@ export default {
             id: id
           })
         }
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    async onEdit (id) {
+      try {
+        await this.setPostToEdit(id)
+        await this.$router.push({ name: 'EditPost', params: { id: id } })
       } catch (err) {
         console.error(err)
       }

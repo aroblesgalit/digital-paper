@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="formSubmit" class="row g-3">
+  <form v-if="postToEdit" @submit.prevent="formSubmit" class="row g-3">
     <div class="col-12">
       <label for="inputTitle" class="form-label">Title:</label>
       <input
@@ -102,7 +102,13 @@ export default {
     }
   },
   created () {
-    console.log(this.postToEdit)
+    this.id = this.postToEdit._id
+    this.category = this.postToEdit.category
+    this.title = this.postToEdit.title
+    this.body = this.postToEdit.body
+    this.image = this.postToEdit.image
+    this.author = this.postToEdit.author
+    this.isPublic = this.postToEdit.isPublic
   },
   computed: {
     ...userModule.mapState(['user']),
