@@ -59,6 +59,11 @@
             </label>
           </div>
         </div>
+        <div v-show="updateSuccessful" class="col-12">
+          <div class="alert alert-success" role="alert">
+            This post is now updated! Taking you back to the dashboard...
+          </div>
+        </div>
         <div class="col-12 d-flex justify-content-end">
           <button
             type="button"
@@ -91,7 +96,8 @@ export default {
       body: '',
       image: '',
       author: '',
-      isPublic: ''
+      isPublic: '',
+      updateSuccessful: false
     }
   },
   methods: {
@@ -108,6 +114,10 @@ export default {
           isPublic: this.isPublic
         }
         await this.updatePost(data)
+        this.updateSuccessful = true
+        setTimeout(() => {
+          this.$router.push({ name: 'Dashboard' })
+        }, 3000)
       } catch (err) {
         console.error(err)
       }
