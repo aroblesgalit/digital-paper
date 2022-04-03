@@ -75,6 +75,17 @@
                 </label>
               </div>
             </div>
+            <div v-show="created" class="col-12">
+              <div class="alert alert-success" role="alert">
+                You have created a new post succesfully! Taking you back to the
+                dashboard...
+              </div>
+            </div>
+            <div v-show="created === false" class="col-12">
+              <div class="alert alert-danger" role="alert">
+                Oh no! Something went wrong. Please try again later.
+              </div>
+            </div>
             <div class="col-12 d-flex justify-content-end">
               <button
                 type="button"
@@ -111,7 +122,8 @@ export default {
       body: '',
       image: '',
       author: '',
-      isPublic: false
+      isPublic: false,
+      created: null
     }
   },
   methods: {
@@ -127,7 +139,12 @@ export default {
           isPublic: this.isPublic
         }
         await this.createPost(data)
+        this.created = true
+        setTimeout(() => {
+          document.getElementsByClassName('btn-close')[0].click()
+        }, 3000)
       } catch (err) {
+        this.created = false
         console.error(err)
       }
     }
