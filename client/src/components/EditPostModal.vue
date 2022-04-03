@@ -135,7 +135,9 @@ export default {
       }
     }
   },
-
+  created () {
+    console.log(this.postToEdit)
+  },
   computed: {
     ...userModule.mapState(['user']),
     ...postModule.mapState(['postToEdit'])
