@@ -106,13 +106,12 @@ export default {
   },
   data () {
     return {
-      id: this.postToEdit._id,
-      category: this.postToEdit.category,
-      title: this.postToEdit.title,
-      body: this.postToEdit.body,
-      image: this.postToEdit.image,
-      author: this.postToEdit.author,
-      isPublic: this.postToEdit.isPublic
+      id: '',
+      category: '',
+      title: '',
+      body: '',
+      image: '',
+      author: ''
     }
   },
 
@@ -137,6 +136,13 @@ export default {
   },
   created () {
     console.log(this.postToEdit)
+    this.id = this.postToEdit._id
+    this.category = this.postToEdit.category
+    this.title = this.postToEdit.title
+    this.body = this.postToEdit.body
+    this.image = this.postToEdit.image
+    this.author = this.postToEdit.author
+    this.isPublic = this.postToEdit.isPublic
   },
   computed: {
     ...userModule.mapState(['user']),

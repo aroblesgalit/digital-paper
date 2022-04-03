@@ -53,7 +53,7 @@
       <button
         type="button"
         class="btn btn-outline-secondary me-3"
-        data-bs-dismiss="modal"
+        @click="onCancel"
       >
         Cancel
       </button>
@@ -99,6 +99,9 @@ export default {
       } catch (err) {
         console.error(err)
       }
+    },
+    onCancel () {
+      this.$router.push({ name: 'Dashboard' })
     }
   },
   created () {
