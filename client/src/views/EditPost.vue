@@ -42,14 +42,14 @@
         </div>
         <div class="col-12">
           <label for="inputBody" class="form-label">Body</label>
-          <div class="grow-wrap">
+          <div class="grow-wrap" ref="growWrap">
             <textarea
               v-model="body"
               class="form-control"
               id="inputBody"
               placeholder="Start typing here..."
-              @input="updateHeight"
               required
+              @input="updateHeight"
             ></textarea>
           </div>
         </div>
@@ -135,7 +135,7 @@ export default {
       this.$router.push({ name: 'Dashboard' })
     },
     updateHeight () {
-      document.querySelector('.grow-wrap').dataset.replicatedValue = this.body
+      this.$refs.growWrap.dataset.replicatedValue = this.body
     }
   },
   created () {
@@ -148,9 +148,7 @@ export default {
     this.isPublic = this.postToEdit.isPublic
   },
   mounted () {
-    document.querySelector(
-      '.grow-wrap'
-    ).dataset.replicatedValue = this.postToEdit.body
+    this.$refs.growWrap.dataset.replicatedValue = this.postToEdit.body
   },
   computed: {
     ...userModule.mapState(['user']),
