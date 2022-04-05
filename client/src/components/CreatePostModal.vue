@@ -17,6 +17,7 @@
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
+            ref="btnClose"
           ></button>
         </div>
         <div class="modal-body">
@@ -144,7 +145,7 @@ export default {
         await this.createPost(data)
         this.created = true
         setTimeout(() => {
-          document.getElementsByClassName('btn-close')[0].click()
+          this.$refs.btnClose.click()
         }, 3000)
       } catch (err) {
         this.created = false
