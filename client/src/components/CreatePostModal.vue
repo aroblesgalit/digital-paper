@@ -58,7 +58,7 @@
             </div>
             <div class="col-12">
               <label for="inputBody" class="form-label">Body</label>
-              <div class="grow-wrap">
+              <div class="grow-wrap" ref="growWrap">
                 <textarea
                   v-model="body"
                   class="form-control"
@@ -152,7 +152,7 @@ export default {
       }
     },
     updateHeight () {
-      document.querySelector('.grow-wrap').dataset.replicatedValue = this.body
+      this.$refs.growWrap.dataset.replicatedValue = this.body
     }
   },
   computed: {
