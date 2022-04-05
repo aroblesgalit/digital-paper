@@ -42,13 +42,16 @@
         </div>
         <div class="col-12">
           <label for="inputBody" class="form-label">Body</label>
-          <textarea
-            v-model="body"
-            class="form-control"
-            id="inputBody"
-            placeholder="Start typing here..."
-            required
-          ></textarea>
+          <div class="grow-wrap">
+            <textarea
+              v-model="body"
+              class="form-control"
+              id="inputBody"
+              placeholder="Start typing here..."
+              @input="updateHeight"
+              required
+            ></textarea>
+          </div>
         </div>
         <div class="col-12">
           <div class="form-check">
@@ -130,6 +133,9 @@ export default {
     },
     onCancel () {
       this.$router.push({ name: 'Dashboard' })
+    },
+    updateHeight () {
+      document.querySelector('.grow-wrap').dataset.replicatedValue = this.body
     }
   },
   created () {
@@ -140,6 +146,11 @@ export default {
     this.image = this.postToEdit.image
     this.author = this.postToEdit.author
     this.isPublic = this.postToEdit.isPublic
+  },
+  mounted () {
+    document.querySelector(
+      '.grow-wrap'
+    ).dataset.replicatedValue = this.postToEdit.body
   },
   computed: {
     ...userModule.mapState(['user']),
@@ -158,5 +169,23 @@ form label {
 }
 h5 {
   width: 100%;
+}
+.grow-wrap {
+  display: grid;
+}
+.grow-wrap::after {
+  content: attr(data-replicated-value) ' ';
+  white-space: pre-wrap;
+  visibility: hidden;
+}
+.grow-wrap > textarea {
+  resize: none;
+  overflow: hidden;
+}
+.grow-wrap > textarea,
+.grow-wrap::after {
+  padding: 0.5rem;
+  font: inherit;
+  grid-area: 1 / 1 / 2 / 2;
 }
 </style>
