@@ -15,7 +15,7 @@ const userModule = {
   actions: {
     async registerUser ({ commit }, data) {
       try {
-        await axios.post('http://localhost:5000/api/user/register', data)
+        await axios.post('api/user/register', data)
         commit('SET_REGS', 'Congratulations! You have successfully registered.')
       } catch (err) {
         console.error(err)
@@ -27,10 +27,7 @@ const userModule = {
     },
     async loginUser ({ commit }, data) {
       try {
-        const response = await axios.post(
-          'http://localhost:5000/api/user/login',
-          data
-        )
+        const response = await axios.post('api/user/login', data)
         commit('SET_USER', response.data)
       } catch (err) {
         console.error(err)
@@ -39,7 +36,7 @@ const userModule = {
     },
     async logoutUser ({ commit }) {
       try {
-        await axios.get('http://localhost:5000/api/user/logout')
+        await axios.get('api/user/logout')
         commit('SET_USER', {})
         commit('SET_REGS', '')
       } catch (err) {
@@ -69,7 +66,7 @@ const postModule = {
   actions: {
     async getPublicPosts ({ commit }) {
       try {
-        const publicPosts = await axios.get('http://localhost:5000/api/posts')
+        const publicPosts = await axios.get('api/posts')
         commit('SET_PUBLIC_POSTS', publicPosts.data)
       } catch (err) {
         console.log(err)
@@ -77,9 +74,7 @@ const postModule = {
     },
     async getUserPosts ({ commit }, data) {
       try {
-        const userPosts = await axios.get(
-          'http://localhost:5000/api/posts/user/' + data.id
-        )
+        const userPosts = await axios.get('api/posts/user/' + data.id)
         commit('SET_USER_POSTS', userPosts.data)
       } catch (err) {
         console.log(err)
@@ -87,10 +82,7 @@ const postModule = {
     },
     async createPost ({ commit, state }, data) {
       try {
-        const newPost = await axios.post(
-          'http://localhost:5000/api/posts',
-          data
-        )
+        const newPost = await axios.post('api/posts', data)
         commit('SET_USER_POSTS', [newPost.data, ...state.userPosts])
       } catch (err) {
         console.log(err)
@@ -98,7 +90,7 @@ const postModule = {
     },
     async deletePost ({ commit, state }, data) {
       try {
-        await axios.delete('http://localhost:5000/api/posts/' + data.id)
+        await axios.delete('api/posts/' + data.id)
         let userPosts = [...state.userPosts]
         let index = userPosts.findIndex(post => post._id === data.id)
         userPosts.splice(index, 1)
@@ -109,9 +101,7 @@ const postModule = {
     },
     async setPostToEdit ({ commit }, payload) {
       try {
-        const result = await axios.get(
-          'http://localhost:5000/api/posts/' + payload
-        )
+        const result = await axios.get('api/posts/' + payload)
         commit('SET_POST_TO_EDIT', result.data)
       } catch (err) {
         console.error(err)
@@ -119,10 +109,7 @@ const postModule = {
     },
     async updatePost ({ commit, state }, data) {
       try {
-        const updatedPost = await axios.put(
-          'http://localhost:5000/api/posts/' + data.id,
-          data
-        )
+        const updatedPost = await axios.put('api/posts/' + data.id, data)
         let userPosts = [...state.userPosts]
         let index = userPosts.findIndex(post => post._id === data.id)
         userPosts.splice(index, 1, updatedPost.data)
