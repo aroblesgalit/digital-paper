@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="body card-body">
-      <span class="badge bg-secondary">{{ post.category }}</span>
+      <span class="fw-bold">{{ post.category }}</span>
       <h5 class="card-title">{{ post.title }}</h5>
       <p class="card-text" :class="[!readMore && 'less']">
         {{ post.body }}
@@ -110,6 +110,10 @@ export default {
 }
 .card .body h5 {
   font-weight: bold;
+}
+.card .body span {
+  font-size: 14px;
+  color: #939393;
 }
 .card .body p {
   font-size: 14px;
