@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center">
     <div class="card">
       <div class="card-body d-flex justify-content-between">
-        <h2>Profile</h2>
+        <h2>Welcome, {{ user.username }}!</h2>
         <button type="button" class="btn btn-primary">
           Save changes
         </button>
@@ -44,6 +44,9 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const userModel = createNamespacedHelpers('user')
+
 export default {
   name: 'Profile',
   data () {
@@ -52,6 +55,9 @@ export default {
       firstName: '',
       lastName: ''
     }
+  },
+  computed: {
+    ...userModel.mapState(['user'])
   }
 }
 </script>
