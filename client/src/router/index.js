@@ -4,6 +4,7 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import EditPost from '../views/EditPost.vue'
+import Profile from '../views/Profile.vue'
 import store from '../store'
 
 const routes = [
@@ -40,6 +41,14 @@ const routes = [
     path: '/post/:id',
     name: 'EditPost',
     component: EditPost,
+    meta: {
+      authRequired: true
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
     meta: {
       authRequired: true
     }
