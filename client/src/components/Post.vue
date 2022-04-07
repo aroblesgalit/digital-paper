@@ -5,7 +5,7 @@
         <div class="avatar">
           {{ post.author.username.split('')[0] }}
         </div>
-        <!-- <img src="https://via.placeholder.com/60" alt="" /> -->
+        <img src="https://via.placeholder.com/60" alt="" />
       </div>
       <div class="d-flex flex-column justify-content-center">
         <p class="m-0">{{ post.author.username }}</p>
