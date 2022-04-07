@@ -10,4 +10,7 @@ router.get('/logout', usersController.logoutUser)
 
 router.get('/authenticated', usersController.fetchAuthUser)
 
+// Match with '/api/user/:id'
+router.route('/:id').patch(usersController.updateUser)
+
 module.exports = router
