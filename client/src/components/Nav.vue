@@ -15,6 +15,9 @@
           <li v-if="isAuthenticated" class="nav-item">
             <router-link class="nav-link" to="/">Favorites</router-link>
           </li>
+          <li v-if="isAuthenticated" class="nav-item">
+            <router-link class="nav-link" to="/profile">Profile</router-link>
+          </li>
           <li class="nav-item">
             <a
               v-if="isAuthenticated"
