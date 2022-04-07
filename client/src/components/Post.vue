@@ -2,7 +2,10 @@
   <div class="card">
     <div class="header card-body d-flex">
       <div class="me-3">
-        <img src="https://via.placeholder.com/60" alt="" />
+        <div class="avatar">
+          {{ post.author.username.split('')[0] }}
+        </div>
+        <!-- <img src="https://via.placeholder.com/60" alt="" /> -->
       </div>
       <div class="d-flex flex-column justify-content-center">
         <p class="m-0">{{ post.author.username }}</p>
@@ -83,8 +86,20 @@ export default {
 .card .header {
   padding-bottom: 0;
 }
-.card .header img {
+/* .card .header img {
   border-radius: 50%;
+} */
+.card .header .avatar {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #4a94eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 100px;
+  overflow: hidden;
 }
 .card .header p {
   font-size: 18px;
