@@ -2,10 +2,10 @@
   <div class="card">
     <div class="header card-body d-flex">
       <div class="me-3">
-        <div class="avatar">
+        <div v-if="!post.author.image" class="avatar">
           {{ post.author.username.split('')[0] }}
         </div>
-        <img src="https://via.placeholder.com/60" alt="" />
+        <img v-else :src="post.author.image" alt="Author avatar" />
       </div>
       <div class="d-flex flex-column justify-content-center">
         <p class="m-0">{{ post.author.username }}</p>
@@ -86,9 +86,11 @@ export default {
 .card .header {
   padding-bottom: 0;
 }
-/* .card .header img {
+.card .header img {
+  height: 60px;
+  width: 60px;
   border-radius: 50%;
-} */
+}
 .card .header .avatar {
   height: 60px;
   width: 60px;
