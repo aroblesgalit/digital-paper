@@ -2,10 +2,14 @@
   <div class="card">
     <div class="header card-body d-flex">
       <div class="me-3">
-        <div v-if="!post.author.image" class="avatar">
+        <img
+          v-if="post.author.image"
+          :src="post.author.image"
+          alt="Author avatar"
+        />
+        <div v-else class="avatar">
           {{ post.author.username.split('')[0] }}
         </div>
-        <img v-else :src="post.author.image" alt="Author avatar" />
       </div>
       <div class="d-flex flex-column justify-content-center">
         <p class="m-0">{{ post.author.username }}</p>

@@ -139,7 +139,7 @@ export default {
           title: this.title,
           body: this.body,
           image: this.image,
-          author: this.user.id,
+          author: this.user._id,
           isPublic: this.isPublic
         }
         await this.createPost(data)

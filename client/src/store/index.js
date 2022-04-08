@@ -92,19 +92,19 @@ const postModule = {
         console.log(err)
       }
     },
-    async createPost ({ commit, state }, data) {
+    async createPost ({ commit, state }, payload) {
       try {
-        const newPost = await axios.post('api/posts', data)
+        const newPost = await axios.post('api/posts', payload)
         commit('SET_USER_POSTS', [newPost.data, ...state.userPosts])
       } catch (err) {
         console.log(err)
       }
     },
-    async deletePost ({ commit, state }, data) {
+    async deletePost ({ commit, state }, payload) {
       try {
-        await axios.delete('api/posts/' + data.id)
+        await axios.delete('api/posts/' + payload.id)
         let userPosts = [...state.userPosts]
-        let index = userPosts.findIndex(post => post._id === data.id)
+        let index = userPosts.findIndex(post => post._id === payload.id)
         userPosts.splice(index, 1)
         commit('SET_USER_POSTS', userPosts)
       } catch (err) {
