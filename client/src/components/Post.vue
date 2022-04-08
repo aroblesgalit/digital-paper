@@ -20,7 +20,11 @@
       </p>
     </div>
     <div class="footer card-body d-flex justify-content-between">
-      <p class="card-link" @click="readMore = !readMore">
+      <p
+        v-if="post.body.split('\n').length > 5"
+        class="card-link"
+        @click="readMore = !readMore"
+      >
         {{ readMore ? 'Show less' : 'Read more' }}
       </p>
       <div class="d-flex">
@@ -73,6 +77,9 @@ export default {
         return Math.floor(difference / (1000 * 60 * 60 * 24)) + 'd'
       }
     }
+  },
+  created () {
+    console.log(this.post.body.split('\n'))
   }
 }
 </script>
