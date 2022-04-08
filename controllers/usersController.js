@@ -17,7 +17,10 @@ module.exports = {
   loginUser: function (req, res) {
     res.json({
       id: req.user._id,
-      username: req.user.username
+      username: req.user.username,
+      image: req.user.image,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName
     })
   },
   logoutUser: function (req, res) {
