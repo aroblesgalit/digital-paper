@@ -135,7 +135,6 @@ export default {
     }
   },
   created () {
-    console.log(this.postToEdit)
     this.id = this.postToEdit._id
     this.category = this.postToEdit.category
     this.title = this.postToEdit.title

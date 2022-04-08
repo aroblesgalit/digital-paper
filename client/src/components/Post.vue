@@ -86,9 +86,6 @@ export default {
         return Math.floor(difference / (1000 * 60 * 60 * 24)) + 'd'
       }
     }
-  },
-  created () {
-    console.log(this.post.body.split('\n'))
   }
 }
 </script>

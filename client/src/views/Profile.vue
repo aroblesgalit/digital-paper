@@ -56,6 +56,12 @@ export default {
       lastName: ''
     }
   },
+  created () {
+    console.log(this.user)
+    this.image = this.user.image
+    this.firstName = this.user.firstName
+    this.lastName = this.user.lastName
+  },
   computed: {
     ...userModel.mapState(['user'])
   }
