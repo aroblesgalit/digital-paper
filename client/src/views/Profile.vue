@@ -57,7 +57,6 @@ export default {
     }
   },
   created () {
-    console.log(this.user)
     this.image = this.user.image
     this.firstName = this.user.firstName
     this.lastName = this.user.lastName

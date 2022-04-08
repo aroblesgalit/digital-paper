@@ -42,6 +42,15 @@ const userModule = {
       } catch (err) {
         console.error(err)
       }
+    },
+    async updateUser ({ state }, payload) {
+      try {
+        const updatedUser = await axios.patch('api/user/' + payload.id, payload)
+        let currentUserState = { ...state.user, ...updatedUser }
+        console.log({ currentUserState })
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   getters: {
