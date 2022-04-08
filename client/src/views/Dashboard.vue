@@ -41,7 +41,7 @@ export default {
   async created () {
     try {
       await this.getUserPosts({
-        id: this.user.id
+        _id: this.user._id
       })
     } catch (err) {
       console.error(err)

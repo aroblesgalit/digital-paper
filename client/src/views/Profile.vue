@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body d-flex justify-content-between">
         <h2>Welcome, {{ user.username }}!</h2>
-        <button type="button" class="btn btn-primary">
+        <button @click="formSubmit" type="button" class="btn btn-primary">
           Save changes
         </button>
       </div>
@@ -45,7 +45,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const userModel = createNamespacedHelpers('user')
+const userModule = createNamespacedHelpers('user')
 
 export default {
   name: 'Profile',
@@ -56,13 +56,29 @@ export default {
       lastName: ''
     }
   },
+  methods: {
+    ...userModule.mapActions(['updateUser']),
+    async formSubmit () {
+      try {
+        const payload = {
+          _id: this.user._id,
+          image: this.image,
+          firstName: this.firstName,
+          lastName: this.lastName
+        }
+        await this.updateUser(payload)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+  },
   created () {
     this.image = this.user.image
     this.firstName = this.user.firstName
     this.lastName = this.user.lastName
   },
   computed: {
-    ...userModel.mapState(['user'])
+    ...userModule.mapState(['user'])
   }
 }
 </script>

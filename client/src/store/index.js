@@ -45,7 +45,10 @@ const userModule = {
     },
     async updateUser ({ state }, payload) {
       try {
-        const updatedUser = await axios.patch('api/user/' + payload.id, payload)
+        const updatedUser = await axios.patch(
+          'api/user/' + payload._id,
+          payload
+        )
         let currentUserState = { ...state.user, ...updatedUser }
         console.log({ currentUserState })
       } catch (err) {
@@ -81,9 +84,9 @@ const postModule = {
         console.log(err)
       }
     },
-    async getUserPosts ({ commit }, data) {
+    async getUserPosts ({ commit }, payload) {
       try {
-        const userPosts = await axios.get('api/posts/user/' + data.id)
+        const userPosts = await axios.get('api/posts/user/' + payload._id)
         commit('SET_USER_POSTS', userPosts.data)
       } catch (err) {
         console.log(err)

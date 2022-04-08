@@ -8,7 +8,7 @@ module.exports = {
     })
       .then(dbUser =>
         res.json({
-          id: dbUser._id,
+          _id: dbUser._id,
           username: dbUser.username
         })
       )
@@ -16,7 +16,7 @@ module.exports = {
   },
   loginUser: function (req, res) {
     res.json({
-      id: req.user._id,
+      _id: req.user._id,
       username: req.user.username,
       image: req.user.image,
       firstName: req.user.firstName,
