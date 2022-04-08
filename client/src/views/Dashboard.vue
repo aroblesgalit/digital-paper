@@ -27,6 +27,7 @@ import TablePosts from '../components/TablePosts.vue'
 import CreatePostModal from '../components/CreatePostModal.vue'
 import { createNamespacedHelpers } from 'vuex'
 const postModule = createNamespacedHelpers('post')
+const userModule = createNamespacedHelpers('user')
 
 export default {
   name: 'Dashboard',
@@ -40,14 +41,15 @@ export default {
   async created () {
     try {
       await this.getUserPosts({
-        id: '6235727a53f932c232da9a9a'
+        id: this.user.id
       })
     } catch (err) {
       console.error(err)
     }
   },
   computed: {
-    ...postModule.mapState(['userPosts'])
+    ...postModule.mapState(['userPosts']),
+    ...userModule.mapState(['user'])
   }
 }
 </script>

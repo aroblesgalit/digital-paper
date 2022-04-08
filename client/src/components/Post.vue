@@ -19,7 +19,16 @@
         {{ post.body }}
       </p>
     </div>
-    <div class="footer card-body d-flex justify-content-between">
+    <div
+      :class="[
+        'footer',
+        'card-body',
+        'd-flex',
+        post.body.split('\n').length > 5
+          ? 'justify-content-between'
+          : 'justify-content-end'
+      ]"
+    >
       <p
         v-if="post.body.split('\n').length > 5"
         class="card-link"
