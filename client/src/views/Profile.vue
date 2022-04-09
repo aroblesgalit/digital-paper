@@ -39,6 +39,15 @@
           </div>
         </form>
       </div>
+
+      <div class="card-body" v-show="updateSuccessful != null">
+        <div class="alert alert-success" role="alert" v-show="updateSuccessful">
+          Your profile was updated!
+        </div>
+        <div class="alert alert-danger" role="alert" v-show="!updateSuccessful">
+          Oh no, something went wrong! Please try again...
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -53,7 +62,8 @@ export default {
     return {
       image: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      updateSuccessful: null
     }
   },
   methods: {
@@ -67,13 +77,20 @@ export default {
           lastName: this.lastName
         }
         await this.updateUser(payload)
+        this.updateSuccessful = true
+        setTimeout(() => {
+          this.updateSuccessful = null
+        }, 5000)
       } catch (err) {
         console.error(err)
+        this.updateSuccessful = false
+        setTimeout(() => {
+          this.updateSuccessful = null
+        }, 5000)
       }
     }
   },
   created () {
-    console.log(this.user)
     this.image = this.user.image
     this.firstName = this.user.firstName
     this.lastName = this.user.lastName
