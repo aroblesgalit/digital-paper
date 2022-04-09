@@ -67,6 +67,13 @@ export default {
       try {
         if (this.password !== this.confirm) {
           return alert('Please make sure password matches.')
+        } else if (
+          this.username.indexOf(' ') >= 0 ||
+          this.password.indexOf(' ') >= 0
+        ) {
+          return alert(
+            "Please don't include any spaces in your username or password."
+          )
         }
 
         await this.registerUser({
