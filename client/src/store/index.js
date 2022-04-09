@@ -43,14 +43,14 @@ const userModule = {
         console.error(err)
       }
     },
-    async updateUser ({ state }, payload) {
+    async updateUser ({ commit, state }, payload) {
       try {
         const updatedUser = await axios.patch(
           'api/user/' + payload._id,
           payload
         )
-        let currentUserState = { ...state.user, ...updatedUser }
-        console.log({ currentUserState })
+        let currentUserState = { ...state.user, ...updatedUser.data }
+        commit('SET_USER', currentUserState)
       } catch (err) {
         console.error(err)
       }
