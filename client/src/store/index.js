@@ -13,6 +13,18 @@ const userModule = {
     SET_USER: (state, payload) => (state.user = payload)
   },
   actions: {
+    async demoLogin ({ commit }) {
+      try {
+        const response = await axios.post('api/user/login', {
+          username: 'demo',
+          password: 'pass123'
+        })
+        commit('SET_USER', response.data)
+      } catch (err) {
+        console.error(err)
+        commit('SET_USER', {})
+      }
+    },
     async registerUser ({ commit }, data) {
       try {
         await axios.post('api/user/register', data)
