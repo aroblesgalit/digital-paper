@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center">
     <div class="card">
       <div class="card-body d-flex justify-content-between">
-        <h2>Welcome, {{ user.username }}!</h2>
+        <h2>Welcome, {{ user.firstName ? user.firstName : user.username }}!</h2>
         <button @click="formSubmit" type="button" class="btn btn-primary">
           Save changes
         </button>
