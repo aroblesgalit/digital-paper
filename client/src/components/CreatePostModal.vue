@@ -74,7 +74,7 @@
               <div class="form-check">
                 <input v-model="isPublic" class="form-check-input"
                 type="checkbox" id="isPublicCheck" value= />
-                <label class="form-check-label" for="publicCheck">
+                <label class="form-check-label" for="isPublicCheck">
                   Make public
                 </label>
               </div>
