@@ -29,7 +29,7 @@
             <router-link v-else class="nav-link" to="/login">Login</router-link>
           </li>
           <li v-if="!isAuthenticated" class="nav-item">
-            <a href="#" class="nav-link">Demo login</a>
+            <a href="#" class="nav-link" @click="handleDemoLogin">Demo login</a>
           </li>
         </ul>
       </div>
@@ -44,11 +44,19 @@ const { mapGetters, mapActions } = createNamespacedHelpers('user')
 export default {
   name: 'Nav',
   methods: {
-    ...mapActions(['logoutUser']),
+    ...mapActions(['logoutUser', 'demoLogin']),
     async handleLogout () {
       try {
         await this.logoutUser()
         await this.$router.push({ name: 'Login' })
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    async handleDemoLogin () {
+      try {
+        await this.demoLogin()
+        await this.$router.push({ name: 'Home' })
       } catch (err) {
         console.error(err)
       }
