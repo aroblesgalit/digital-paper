@@ -57,7 +57,7 @@
           <div class="form-check">
             <input v-model="isPublic" class="form-check-input" type="checkbox"
             id="isPublicCheck" value= />
-            <label class="form-check-label" for="publicCheck">
+            <label class="form-check-label" for="isPublicCheck">
               Make public
             </label>
           </div>
@@ -81,7 +81,7 @@
             Cancel
           </button>
           <button type="submit" class="btn btn-primary">
-            Edit
+            Save changes
           </button>
         </div>
       </form>
@@ -112,7 +112,7 @@ export default {
     ...postModule.mapActions(['updatePost']),
     async formSubmit () {
       try {
-        const data = {
+        const payload = {
           id: this.id,
           category: this.category,
           title: this.title,
@@ -121,10 +121,10 @@ export default {
           author: this.user._id,
           isPublic: this.isPublic
         }
-        await this.updatePost(data)
-        this.updateSuccessful = true
+        await this.updatePost(payload)
+        // this.updateSuccessful = true
         setTimeout(() => {
-          this.$router.push({ name: 'Dashboard' })
+          // this.$router.push({ name: 'Dashboard' })
         }, 3000)
       } catch (err) {
         this.updateSuccessful = false

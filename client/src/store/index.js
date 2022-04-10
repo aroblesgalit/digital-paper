@@ -131,11 +131,11 @@ const postModule = {
         console.error(err)
       }
     },
-    async updatePost ({ commit, state }, data) {
+    async updatePost ({ commit, state }, payload) {
       try {
-        const updatedPost = await axios.put('api/posts/' + data.id, data)
+        const updatedPost = await axios.put('api/posts/' + payload.id, payload)
         let userPosts = [...state.userPosts]
-        let index = userPosts.findIndex(post => post._id === data.id)
+        let index = userPosts.findIndex(post => post._id === payload.id)
         userPosts.splice(index, 1, updatedPost.data)
         commit('SET_USER_POSTS', userPosts)
       } catch (err) {
