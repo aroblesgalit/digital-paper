@@ -28,6 +28,9 @@
             >
             <router-link v-else class="nav-link" to="/login">Login</router-link>
           </li>
+          <li v-if="!isAuthenticated" class="nav-item">
+            <a href="#" class="nav-link">Demo login</a>
+          </li>
         </ul>
       </div>
     </div>
