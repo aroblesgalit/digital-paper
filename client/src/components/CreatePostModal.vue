@@ -146,9 +146,21 @@ export default {
         this.created = true
         setTimeout(() => {
           this.$refs.btnClose.click()
+          this.category = ''
+          this.title = ''
+          this.body = ''
+          this.image = ''
+          this.author = ''
+          this.isPublic = false
+          this.created = null
+          this.updateHeight()
         }, 3000)
       } catch (err) {
         this.created = false
+        setTimeout(() => {
+          this.created = null
+          this.updateHeight()
+        }, 3000)
         console.error(err)
       }
     },
