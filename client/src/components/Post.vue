@@ -19,7 +19,7 @@
     <div class="body card-body">
       <span class="fw-bold">{{ post.category }}</span>
       <h5 class="card-title">{{ post.title }}</h5>
-      <p class="card-text" :class="[!readMore && 'less']">
+      <p ref="postBody" class="card-text" :class="[!readMore && 'less']">
         {{ post.body }}
       </p>
     </div>
@@ -28,16 +28,10 @@
         'footer',
         'card-body',
         'd-flex',
-        post.body.split('\n').length > 5
-          ? 'justify-content-between'
-          : 'justify-content-end'
+        showLink ? 'justify-content-between' : 'justify-content-end'
       ]"
     >
-      <p
-        v-if="post.body.split('\n').length > 5"
-        class="card-link"
-        @click="readMore = !readMore"
-      >
+      <p v-if="showLink" class="card-link" @click="readMore = !readMore">
         {{ readMore ? 'Show less' : 'Read more' }}
       </p>
       <div class="d-flex">
@@ -60,7 +54,13 @@ export default {
   },
   data () {
     return {
-      readMore: false
+      readMore: false,
+      showLink: false
+    }
+  },
+  mounted () {
+    if (this.$refs.postBody.clientHeight >= 105) {
+      this.showLink = true
     }
   },
   computed: {
