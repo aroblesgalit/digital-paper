@@ -1,3 +1,4 @@
+const rules = require('nodemon/lib/rules')
 const path = require('path')
 
 module.exports = {

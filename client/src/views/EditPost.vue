@@ -122,9 +122,9 @@ export default {
           isPublic: this.isPublic
         }
         await this.updatePost(payload)
-        // this.updateSuccessful = true
+        this.updateSuccessful = true
         setTimeout(() => {
-          // this.$router.push({ name: 'Dashboard' })
+          this.$router.push({ name: 'Dashboard' })
         }, 3000)
       } catch (err) {
         this.updateSuccessful = false
