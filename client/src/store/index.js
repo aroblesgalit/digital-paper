@@ -98,7 +98,7 @@ const postModule = {
     },
     async getUserPosts ({ commit }, payload) {
       try {
-        const userPosts = await axios.get('api/posts/user/' + payload._id)
+        const userPosts = await axios.get(`api/posts/user/${payload._id}`)
         commit('SET_USER_POSTS', userPosts.data)
       } catch (err) {
         console.log(err)
@@ -114,7 +114,7 @@ const postModule = {
     },
     async deletePost ({ commit, state }, payload) {
       try {
-        await axios.delete('api/posts/' + payload.id)
+        await axios.delete(`api/posts/${payload.id}`)
         let userPosts = [...state.userPosts]
         let index = userPosts.findIndex(post => post._id === payload.id)
         userPosts.splice(index, 1)
@@ -125,7 +125,7 @@ const postModule = {
     },
     async setPostToEdit ({ commit }, payload) {
       try {
-        const result = await axios.get('api/posts/' + payload)
+        const result = await axios.get(`api/posts/${payload}`)
         commit('SET_POST_TO_EDIT', result.data)
       } catch (err) {
         console.error(err)
@@ -133,7 +133,7 @@ const postModule = {
     },
     async updatePost ({ commit, state }, payload) {
       try {
-        const updatedPost = await axios.put('api/posts/' + payload.id, payload)
+        const updatedPost = await axios.put(`api/posts/${payload.id}`, payload)
         let userPosts = [...state.userPosts]
         let index = userPosts.findIndex(post => post._id === payload.id)
         userPosts.splice(index, 1, updatedPost.data)
