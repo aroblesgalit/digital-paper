@@ -104,8 +104,7 @@ export default {
       body: '',
       image: '',
       author: '',
-      isPublic: '',
-      updateSuccessful: null
+      isPublic: ''
     }
   },
   methods: {
@@ -122,12 +121,10 @@ export default {
           isPublic: this.isPublic
         }
         await this.updatePost(payload)
-        this.updateSuccessful = true
         setTimeout(() => {
           this.$router.push({ name: 'Dashboard' })
         }, 3000)
       } catch (err) {
-        this.updateSuccessful = false
         console.error(err)
       }
     },
@@ -152,7 +149,7 @@ export default {
   },
   computed: {
     ...userModule.mapState(['user']),
-    ...postModule.mapState(['postToEdit'])
+    ...postModule.mapState(['postToEdit', 'updateSuccessful'])
   }
 }
 </script>

@@ -146,6 +146,10 @@ const postModule = {
         }, 3000)
       } catch (err) {
         console.error(err)
+        commit('SET_UPDATE_STAT', false)
+        setTimeout(() => {
+          commit('SET_UPDATE_STAT', null)
+        }, 3000)
       }
     }
   },
