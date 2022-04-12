@@ -80,12 +80,14 @@ const postModule = {
   state: {
     publicPosts: [],
     userPosts: [],
-    postToEdit: {}
+    postToEdit: {},
+    updateSuccessful: null
   },
   mutations: {
     SET_PUBLIC_POSTS: (state, payload) => (state.publicPosts = payload),
     SET_USER_POSTS: (state, payload) => (state.userPosts = payload),
-    SET_POST_TO_EDIT: (state, payload) => (state.postToEdit = payload)
+    SET_POST_TO_EDIT: (state, payload) => (state.postToEdit = payload),
+    SET_UPDATE_STAT: (state, payload) => (state.updateSuccessful = payload)
   },
   actions: {
     async getPublicPosts ({ commit }) {
@@ -133,14 +135,15 @@ const postModule = {
     },
     async updatePost ({ commit, state }, payload) {
       try {
-        const updatedPost = await axios.put(
-          `http://localhost:5000/api/posts/${payload.id}`,
-          payload
-        )
+        const updatedPost = await axios.put(`api/posts/${payload.id}`, payload)
         let userPosts = [...state.userPosts]
         let index = userPosts.findIndex(post => post._id === payload.id)
         userPosts.splice(index, 1, updatedPost.data)
         commit('SET_USER_POSTS', userPosts)
+        commit('SET_UPDATE_STAT', true)
+        setTimeout(() => {
+          commit('SET_UPDATE_STAT', null)
+        }, 3000)
       } catch (err) {
         console.error(err)
       }
