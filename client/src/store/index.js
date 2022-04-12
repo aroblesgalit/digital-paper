@@ -135,7 +135,7 @@ const postModule = {
     },
     async updatePost ({ commit, state }, payload) {
       try {
-        const updatedPost = await axios.put(`api/posts/${payload.id}`, payload)
+        const updatedPost = await axios.put(`/api/posts/${payload.id}`, payload)
         let userPosts = [...state.userPosts]
         let index = userPosts.findIndex(post => post._id === payload.id)
         userPosts.splice(index, 1, updatedPost.data)
