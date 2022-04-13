@@ -14,7 +14,9 @@
       <div class="d-flex flex-column justify-content-center">
         <p class="m-0">
           {{
-            post.author.firstName ? post.author.firstName : post.author.username
+            post.author.firstName && post.author.lastName
+              ? post.author.firstName + ' ' + post.author.lastName
+              : post.author.username
           }}
         </p>
         <span>{{ formattedTime }}</span>
