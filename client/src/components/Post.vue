@@ -12,7 +12,11 @@
         </div>
       </div>
       <div class="d-flex flex-column justify-content-center">
-        <p class="m-0">{{ post.author.username }}</p>
+        <p class="m-0">
+          {{
+            post.author.firstName ? post.author.firstName : post.author.username
+          }}
+        </p>
         <span>{{ formattedTime }}</span>
       </div>
     </div>
