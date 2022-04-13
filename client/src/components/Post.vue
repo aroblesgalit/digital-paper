@@ -138,7 +138,12 @@ export default {
 }
 .post-image {
   width: 100%;
-  height: 100px;
+  height: 80px;
+}
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .card .body h5 {
   font-weight: bold;
