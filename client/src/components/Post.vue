@@ -23,6 +23,9 @@
       </div>
     </div>
     <div class="body card-body">
+      <div class="post-image" v-if="post.image">
+        <img :src="post.image" alt="" role="presentation" aria-hidden="true" />
+      </div>
       <span class="fw-bold">{{ post.category }}</span>
       <h5 class="card-title">{{ post.title }}</h5>
       <p ref="postBody" class="card-text" :class="[!readMore && 'less']">
@@ -132,6 +135,10 @@ export default {
 }
 .card .header span {
   font-size: 12px;
+}
+.post-image {
+  width: 100%;
+  height: 100px;
 }
 .card .body h5 {
   font-weight: bold;
