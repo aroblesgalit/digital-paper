@@ -4,10 +4,19 @@ const db = require('../models')
 module.exports = {
   getPublicPosts: function (req, res) {
     db.Post.find({ isPublic: true })
-      .populate({
-        path: 'author',
-        select: '_id username firstName lastName image'
-      })
+      .populate([
+        {
+          path: 'author',
+          select: '_id username firstName lastName image'
+        },
+        {
+          path: 'comments',
+          populate: {
+            path: 'commenter',
+            select: '_id username firstName lastName image'
+          }
+        }
+      ])
       .sort({ createdAt: -1 })
       .then(dbModels => res.json(dbModels))
       .catch(err => res.status(422).json(err))
@@ -48,6 +57,19 @@ module.exports = {
       },
       { new: true }
     )
+      .populate([
+        {
+          path: 'author',
+          select: '_id username firstName lastName image'
+        },
+        {
+          path: 'comments',
+          populate: {
+            path: 'commenter',
+            select: '_id username firstName lastName image'
+          }
+        }
+      ])
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   }

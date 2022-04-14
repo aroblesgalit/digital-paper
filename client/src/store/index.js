@@ -163,7 +163,6 @@ const commentModule = {
   actions: {
     async createComment ({ commit, rootState }, payload) {
       try {
-        console.log({ payload })
         const newComment = await axios.post('api/comments', {
           body: payload.body,
           commenter: payload.commenter
@@ -180,7 +179,7 @@ const commentModule = {
           post => post._id === payload.postId
         )
         currentPublicPosts.splice(indexOfPostToUpdate, 1, updatedPost.data)
-        commit('post/SET_PUBLIC_POSTS', currentPublicPosts)
+        commit('post/SET_PUBLIC_POSTS', currentPublicPosts, { root: true })
       } catch (err) {
         console.error(err)
       }
