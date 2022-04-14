@@ -167,13 +167,11 @@ const commentModule = {
           body: payload.body,
           commenter: payload.commenter
         })
-        console.log(newComment.data)
         // Update post by adding comment id
         const updatedPost = await axios.patch(
           `/api/posts/${payload.postId}`,
           newComment.data
         )
-        console.log({ updatedPost })
         const currentPublicPosts = [...rootState.post.publicPosts]
         let indexOfPostToUpdate = currentPublicPosts.findIndex(
           post => post._id === payload.postId

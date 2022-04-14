@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="card-body comments" v-show="showComments">
-      <Comments :postId="post._id" />
+      <Comments :post="post" />
     </div>
   </div>
 </template>

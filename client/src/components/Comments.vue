@@ -26,10 +26,14 @@
         ></span>
       </div>
     </form>
+    <div class="comments-list">
+      <Comment />
+    </div>
   </div>
 </template>
 
 <script>
+import Comment from './Comment.vue'
 import { createNamespacedHelpers } from 'vuex'
 const userModule = createNamespacedHelpers('user')
 const commentModule = createNamespacedHelpers('comment')
@@ -37,8 +41,9 @@ const commentModule = createNamespacedHelpers('comment')
 export default {
   name: 'Comments',
   props: {
-    postId: String
+    post: Object
   },
+  components: { Comment },
   data () {
     return {
       body: ''
@@ -50,7 +55,7 @@ export default {
       try {
         if (!this.body) return
         const payload = {
-          postId: this.postId,
+          postId: this.post._id,
           body: this.body,
           commenter: this.user._id
           // Also pass down post id to add this comment to the post
