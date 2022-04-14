@@ -55,13 +55,21 @@
       </div>
     </div>
     <div class="card-body comments" v-show="showComments">
-      <Comments :post="post" />
+      <CommentInput :post="post" />
+    </div>
+    <div class="card-body comments" v-show="showComments">
+      <Comment
+        v-for="comment in post.comments"
+        :key="comment._id"
+        :comment="comment"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Comments from './Comments.vue'
+import CommentInput from './CommentInput.vue'
+import Comment from './Comment.vue'
 
 export default {
   name: 'Post',
@@ -69,7 +77,8 @@ export default {
     post: Object
   },
   components: {
-    Comments
+    CommentInput,
+    Comment
   },
   data () {
     return {
