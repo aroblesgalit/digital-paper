@@ -48,23 +48,34 @@
           <span class="bi bi-heart">&nbsp;{{ post.likes.length }}</span>
         </div>
         <div>
-          <span class="bi bi-chat">&nbsp;{{ post.comments.length }}</span>
+          <span class="bi bi-chat" @click="showComments = !showComments"
+            >&nbsp;{{ post.comments.length }}</span
+          >
         </div>
       </div>
+    </div>
+    <div class="card-body" v-show="showComments">
+      <Comments />
     </div>
   </div>
 </template>
 
 <script>
+import Comments from './Comments.vue'
+
 export default {
   name: 'Post',
   props: {
     post: Object
   },
+  components: {
+    Comments
+  },
   data () {
     return {
       readMore: false,
-      showLink: false
+      showLink: false,
+      showComments: false
     }
   },
   mounted () {
@@ -176,5 +187,6 @@ export default {
 }
 .card .footer span {
   font-size: 14px;
+  cursor: pointer;
 }
 </style>

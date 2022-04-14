@@ -1,5 +1,5 @@
 <template>
-  <div class="card-body d-flex">
+  <div class="d-flex">
     <div class="me-2">
       <img src="" alt="User avatar" />
       <!-- <div v-else class="avatar">
