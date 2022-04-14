@@ -41,7 +41,7 @@ module.exports = {
   addCommentToPost: function (req, res) {
     db.Post.findByIdAndUpdate(req.params.id, {
       $push: {
-        comments: req.body.commentId
+        comments: req.body._id
       }
     })
       .then(dbModel => res.json(dbModel))

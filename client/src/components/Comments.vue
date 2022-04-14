@@ -36,6 +36,9 @@ const commentModule = createNamespacedHelpers('comment')
 
 export default {
   name: 'Comments',
+  props: {
+    postId: String
+  },
   data () {
     return {
       body: ''
@@ -47,6 +50,7 @@ export default {
       try {
         if (!this.body) return
         const payload = {
+          postId: this.postId,
           body: this.body,
           commenter: this.user._id
           // Also pass down post id to add this comment to the post
