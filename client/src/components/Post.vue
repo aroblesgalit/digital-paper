@@ -124,13 +124,13 @@ export default {
   padding-bottom: 0;
 }
 .card .header img {
-  height: 60px;
-  width: 60px;
+  height: 42px;
+  width: 42px;
   border-radius: 50%;
 }
 .card .header .avatar {
-  height: 60px;
-  width: 60px;
+  height: 42px;
+  width: 42px;
   border-radius: 50%;
   background-color: #4a94eb;
   display: flex;
