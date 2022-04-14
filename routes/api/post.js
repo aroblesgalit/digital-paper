@@ -16,5 +16,6 @@ router
   .put(postsController.updatePost)
   .delete(postsController.deletePost)
   .get(postsController.getPostById)
+  .patch(postsController.addCommentToPost)
 
 module.exports = router
