@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex">
     <div>
       <img
         v-if="comment.commenter.image"
@@ -11,9 +11,15 @@
       </div>
     </div>
     <div>
-      <h4>Name</h4>
-      <span>date posted</span>
-      <p>comment</p>
+      <h4>
+        {{
+          comment.commenter.firstName && comment.commenter.lastName
+            ? comment.commenter.firstName + ' ' + comment.commenter.lastName
+            : comment.commenter.username
+        }}
+      </h4>
+      <span>{{ formattedTime }}</span>
+      <p>{{ comment.body }}</p>
     </div>
   </div>
 </template>
@@ -23,6 +29,34 @@ export default {
   name: 'Comment',
   props: {
     comment: Object
+  },
+  computed: {
+    formattedTime () {
+      let datePosted = new Date(this.comment.createdAt)
+      let dateNow = new Date()
+      let difference = dateNow - datePosted
+      if (
+        datePosted.getMonth() === dateNow.getMonth() &&
+        datePosted.getDate() === dateNow.getDate() &&
+        datePosted.getFullYear() === dateNow.getFullYear()
+      ) {
+        let seconds = Math.floor((difference / 1000) % 60)
+        let minutes = Math.floor((difference / (1000 * 60)) % 60)
+        let hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
+        if (hours < 1 && minutes < 1) {
+          return seconds + 's'
+        } else if (hours < 1) {
+          return minutes + 'm'
+        } else {
+          return hours + 'h'
+        }
+      } else if (Math.floor(difference / (1000 * 60 * 60 * 24)) < 1) {
+        let hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
+        return hours + 'h'
+      } else {
+        return Math.floor(difference / (1000 * 60 * 60 * 24)) + 'd'
+      }
+    }
   }
 }
 </script>
