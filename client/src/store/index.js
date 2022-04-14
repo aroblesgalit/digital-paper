@@ -156,10 +156,27 @@ const postModule = {
   getters: {}
 }
 
+const commentModule = {
+  namespaced: true,
+  state: {},
+  mutations: {},
+  actions: {
+    async createComment (context, payload) {
+      try {
+        await axios.post('api/comments', payload)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+  },
+  getters: {}
+}
+
 export default createStore({
   plugins: [createdPersistedState()],
   modules: {
     user: userModule,
-    post: postModule
+    post: postModule,
+    comment: commentModule
   }
 })
