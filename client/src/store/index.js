@@ -161,11 +161,21 @@ const commentModule = {
   state: {},
   mutations: {},
   actions: {
-    async createComment (context, payload) {
+    async createComment ({ commit, rootState }, payload) {
       try {
         const newComment = await axios.post('api/comments', payload)
         console.log(newComment)
         // Update post by adding comment id
+        const updatedPost = await axios.patch(
+          `/api/posts/${payload.postId}`,
+          payload
+        )
+        const currentPublicPosts = [...rootState.post.publicPosts]
+        let indexOfPostToUpdate = currentPublicPosts.findIndex(
+          post => post._id === payload.postId
+        )
+        currentPublicPosts.splice(indexOfPostToUpdate, 1, updatedPost.data)
+        commit('post/SET_PUBLIC_POSTS', currentPublicPosts)
       } catch (err) {
         console.error(err)
       }
