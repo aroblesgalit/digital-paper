@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-    <div class="card-body" v-show="showComments">
+    <div class="card-body comments" v-show="showComments">
       <Comments />
     </div>
   </div>
@@ -177,6 +177,7 @@ export default {
 }
 .card .footer {
   padding-top: 0;
+  padding-bottom: 0;
 }
 .card .footer p.card-link {
   font-size: 14px;
@@ -188,5 +189,8 @@ export default {
 .card .footer span {
   font-size: 14px;
   cursor: pointer;
+}
+.card-body.comments {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 </style>
