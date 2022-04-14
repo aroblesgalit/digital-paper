@@ -39,11 +39,15 @@ module.exports = {
       .catch(err => res.status(422).json(err))
   },
   addCommentToPost: function (req, res) {
-    db.Post.findByIdAndUpdate(req.params.id, {
-      $push: {
-        comments: req.body._id
-      }
-    })
+    db.Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {
+          comments: req.body._id
+        }
+      },
+      { new: true }
+    )
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   }
