@@ -37,5 +37,14 @@ module.exports = {
     db.Post.findOne({ _id: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
+  },
+  addCommentToPost: function (req, res) {
+    db.Post.findByIdAndUpdate(req.params.id, {
+      $push: {
+        comments: req.body.commentId
+      }
+    })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err))
   }
 }

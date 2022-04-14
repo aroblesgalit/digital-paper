@@ -163,7 +163,9 @@ const commentModule = {
   actions: {
     async createComment (context, payload) {
       try {
-        await axios.post('api/comments', payload)
+        const newComment = await axios.post('api/comments', payload)
+        console.log(newComment)
+        // Update post by adding comment id
       } catch (err) {
         console.error(err)
       }

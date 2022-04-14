@@ -49,6 +49,7 @@ export default {
         const payload = {
           body: this.body,
           commenter: this.user._id
+          // Also pass down post id to add this comment to the post
         }
         await this.createComment(payload)
         this.body = ''
