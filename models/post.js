@@ -28,20 +28,13 @@ const postSchema = new Schema(
     likes: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
       }
     ],
     comments: [
       {
-        comment: {
-          type: String,
-          trim: true,
-          required: true
-        },
-        commenter: {
-          type: Schema.Types.ObjectId,
-          ref: 'User'
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
       }
     ],
     isPublic: {

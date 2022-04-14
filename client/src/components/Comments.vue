@@ -10,7 +10,7 @@
         }}
       </div>
     </div>
-    <form>
+    <form @submit.prevent="formSubmit">
       <label class="visually-hidden" for="comment-body">Comment</label>
       <div class="input-group">
         <input
@@ -21,7 +21,9 @@
           placeholder="Write a comment..."
           required
         />
-        <span class="input-group-text"><i class="bi bi-send"></i></span>
+        <span @click="formSubmit" class="input-group-text"
+          ><i class="bi bi-send"></i
+        ></span>
       </div>
     </form>
   </div>
@@ -30,12 +32,29 @@
 <script>
 import { createNamespacedHelpers } from 'vuex'
 const userModule = createNamespacedHelpers('user')
+const commentModule = createNamespacedHelpers('comment')
 
 export default {
   name: 'Comments',
   data () {
     return {
       body: ''
+    }
+  },
+  methods: {
+    ...commentModule.mapActions(['createComment']),
+    async formSubmit () {
+      try {
+        if (!this.body) return
+        const payload = {
+          body: this.body,
+          commenter: this.user._id
+        }
+        await this.createComment(payload)
+        this.body = ''
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   computed: {
