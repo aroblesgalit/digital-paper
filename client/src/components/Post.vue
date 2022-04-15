@@ -219,4 +219,17 @@ export default {
   max-height: 500px;
   overflow-y: scroll;
 }
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #acacac;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #949494;
+}
 </style>
