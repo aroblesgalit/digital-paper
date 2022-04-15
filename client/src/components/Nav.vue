@@ -44,7 +44,7 @@ const { mapGetters, mapActions } = createNamespacedHelpers('user')
 export default {
   name: 'Nav',
   methods: {
-    ...mapActions(['logoutUser', 'demoLogin']),
+    ...mapActions(['logoutUser', 'demoLogin', 'checkLoginStatus']),
     async handleLogout () {
       try {
         await this.logoutUser()
@@ -56,6 +56,7 @@ export default {
     async handleDemoLogin () {
       try {
         await this.demoLogin()
+        await this.checkLoginStatus()
         await this.$router.push({ name: 'Home' })
       } catch (err) {
         console.error(err)

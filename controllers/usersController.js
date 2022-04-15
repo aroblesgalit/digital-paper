@@ -37,7 +37,8 @@ module.exports = {
         _id: req.user._id,
         username: req.user.username,
         firstName: req.user.firstName,
-        lastName: req.user.lastName
+        lastName: req.user.lastName,
+        image: req.user.image
       })
     }
   },

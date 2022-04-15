@@ -15,12 +15,12 @@ export default {
   components: { Post },
   methods: {
     ...postModule.mapActions(['getPublicPosts']),
-    ...userModule.mapActions(['findUser'])
+    ...userModule.mapActions(['checkLoginStatus'])
   },
   async created () {
     try {
       await this.getPublicPosts()
-      await this.findUser()
+      await this.checkLoginStatus()
     } catch (err) {
       console.error(err)
     }

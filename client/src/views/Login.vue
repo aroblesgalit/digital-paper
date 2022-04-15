@@ -51,13 +51,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loginUser']),
+    ...mapActions(['loginUser', 'checkLoginStatus']),
     async formSubmit () {
       try {
         await this.loginUser({
           username: this.username,
           password: this.password
         })
+        await this.checkLoginStatus()
         await this.$router.push({ name: 'Home' })
       } catch (err) {
         console.error(err)

@@ -13,16 +13,14 @@ const userModule = {
     SET_USER: (state, payload) => (state.user = payload)
   },
   actions: {
-    async demoLogin ({ commit }) {
+    async demoLogin () {
       try {
-        const response = await axios.post('api/user/login', {
+        await axios.post('api/user/login', {
           username: 'demo',
           password: 'pass123'
         })
-        commit('SET_USER', response.data)
       } catch (err) {
         console.error(err)
-        commit('SET_USER', {})
       }
     },
     async registerUser ({ commit }, data) {
@@ -37,13 +35,11 @@ const userModule = {
         )
       }
     },
-    async loginUser ({ commit }, data) {
+    async loginUser (context, data) {
       try {
-        const response = await axios.post('api/user/login', data)
-        commit('SET_USER', response.data)
+        await axios.post('api/user/login', data)
       } catch (err) {
         console.error(err)
-        commit('SET_USER', {})
       }
     },
     async logoutUser ({ commit }) {
@@ -67,12 +63,13 @@ const userModule = {
         console.error(err)
       }
     },
-    async findUser () {
+    async checkLoginStatus ({ commit }) {
       try {
-        const user = await axios.get('/api/user/authenticated')
-        console.log(user)
+        const response = await axios.get('/api/user/authenticated')
+        commit('SET_USER', response.data)
       } catch (err) {
         console.error(err)
+        commit('SET_USER', {})
       }
     }
   },
