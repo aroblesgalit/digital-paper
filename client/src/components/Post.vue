@@ -43,7 +43,7 @@
       <p v-if="showLink" class="card-link" @click="readMore = !readMore">
         {{ readMore ? 'Show less' : 'Read more' }}
       </p>
-      <div class="d-flex">
+      <div class="d-flex mb-3">
         <div class="me-4">
           <span class="bi bi-heart">&nbsp;{{ post.likes.length }}</span>
         </div>
