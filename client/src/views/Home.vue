@@ -14,11 +14,13 @@ export default {
   name: 'Home',
   components: { Post },
   methods: {
-    ...postModule.mapActions(['getPublicPosts'])
+    ...postModule.mapActions(['getPublicPosts']),
+    ...userModule.mapActions(['findUser'])
   },
   async created () {
     try {
       await this.getPublicPosts()
+      await this.findUser()
     } catch (err) {
       console.error(err)
     }

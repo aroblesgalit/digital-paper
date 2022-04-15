@@ -34,8 +34,10 @@ module.exports = {
       res.status(401).json({})
     } else {
       res.json({
-        id: req.user.id,
-        username: req.user.username
+        _id: req.user._id,
+        username: req.user.username,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName
       })
     }
   },
@@ -43,5 +45,6 @@ module.exports = {
     db.User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
-  }
+  },
+  deleteUser: function (req, res) {}
 }

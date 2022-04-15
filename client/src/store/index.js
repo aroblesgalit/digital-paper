@@ -66,6 +66,14 @@ const userModule = {
       } catch (err) {
         console.error(err)
       }
+    },
+    async findUser () {
+      try {
+        const user = await axios.get('/api/user/authenticated')
+        console.log(user)
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   getters: {
