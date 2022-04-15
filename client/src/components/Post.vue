@@ -54,7 +54,10 @@
         </div>
       </div>
     </div>
-    <div class="card-body comments" v-show="isAuthenticated && showComments">
+    <div
+      class="card-body comment-input"
+      v-show="isAuthenticated && showComments"
+    >
       <CommentInput :post="post" />
     </div>
     <div
@@ -206,7 +209,14 @@ export default {
   font-size: 14px;
   cursor: pointer;
 }
+.card-body.comment-input,
 .card-body.comments {
   border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-body.comments {
+  padding-top: 0;
+  background-color: #f7fcff;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 </style>

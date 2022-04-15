@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex">
-    <div>
+  <div class="d-flex comment-wrapper py-3">
+    <div class="me-2">
       <img
         v-if="comment.commenter.image"
         :src="comment.commenter.image"
@@ -10,7 +10,7 @@
         {{ comment.commenter.username.split('')[0] }}
       </div>
     </div>
-    <div>
+    <div class="mt-1">
       <h4>
         {{
           comment.commenter.firstName && comment.commenter.lastName
@@ -62,6 +62,9 @@ export default {
 </script>
 
 <style scoped>
+.comment-wrapper {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
 img {
   height: 32px;
   width: 32px;
@@ -78,5 +81,17 @@ img {
   color: #ffffff;
   font-size: 100px;
   overflow: hidden;
+}
+h4 {
+  font-size: 14px;
+  line-height: 0.5;
+  margin: 0;
+}
+span {
+  font-size: 12px;
+}
+p {
+  font-size: 14px;
+  margin: 0;
 }
 </style>
