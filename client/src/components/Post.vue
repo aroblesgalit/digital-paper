@@ -54,10 +54,13 @@
         </div>
       </div>
     </div>
-    <div class="card-body comments" v-show="showComments">
+    <div class="card-body comments" v-show="isAuthenticated && showComments">
       <CommentInput :post="post" />
     </div>
-    <div class="card-body comments" v-show="showComments">
+    <div
+      class="card-body comments"
+      v-show="showComments && post.comments.length > 0"
+    >
       <Comment
         v-for="comment in post.comments"
         :key="comment._id"
@@ -70,6 +73,8 @@
 <script>
 import CommentInput from './CommentInput.vue'
 import Comment from './Comment.vue'
+import { createNamespacedHelpers } from 'vuex'
+const userModule = createNamespacedHelpers('user')
 
 export default {
   name: 'Post',
@@ -93,6 +98,8 @@ export default {
     }
   },
   computed: {
+    ...userModule.mapState(['user']),
+    ...userModule.mapGetters(['isAuthenticated']),
     formattedTime () {
       let datePosted = new Date(this.post.createdAt)
       let dateNow = new Date()

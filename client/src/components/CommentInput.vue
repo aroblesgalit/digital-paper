@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-center">
+  <div class="d-flex align-items-center" v-if="isAuthenticated">
     <div class="me-2">
       <img v-if="user.image" :src="user.image" alt="User avatar" />
       <div v-else class="avatar">
@@ -62,7 +62,8 @@ export default {
     }
   },
   computed: {
-    ...userModule.mapState(['user'])
+    ...userModule.mapState(['user']),
+    ...userModule.mapGetters(['isAuthenticated'])
   }
 }
 </script>
