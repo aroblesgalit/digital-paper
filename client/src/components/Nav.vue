@@ -28,6 +28,16 @@
             >
             <router-link v-else class="nav-link" to="/login">Login</router-link>
           </li>
+          <li v-if="isAuthenticated" class="nav-item d-flex align-items-center">
+            <img v-if="user.image" :src="user.image" alt="User avatar" />
+            <div v-else class="avatar">
+              {{
+                user.firstName
+                  ? user.firstName.split('')[0]
+                  : user.username.split('')[0]
+              }}
+            </div>
+          </li>
           <li v-if="!isAuthenticated" class="nav-item">
             <a href="#" class="nav-link" @click="handleDemoLogin">Demo login</a>
           </li>
@@ -39,12 +49,12 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapGetters, mapActions } = createNamespacedHelpers('user')
+const userModule = createNamespacedHelpers('user')
 
 export default {
   name: 'Nav',
   methods: {
-    ...mapActions(['logoutUser', 'demoLogin', 'checkLoginStatus']),
+    ...userModule.mapActions(['logoutUser', 'demoLogin', 'checkLoginStatus']),
     async handleLogout () {
       try {
         await this.logoutUser()
@@ -64,9 +74,28 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isAuthenticated'])
+    ...userModule.mapGetters(['isAuthenticated']),
+    ...userModule.mapState(['user'])
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+img {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+}
+.avatar {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: #4a94eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 80px;
+  overflow: hidden;
+}
+</style>
