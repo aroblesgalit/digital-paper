@@ -79,7 +79,7 @@ img {
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  font-size: 100px;
+  font-size: 80px;
   overflow: hidden;
 }
 h4 {
