@@ -41,7 +41,9 @@
       </div>
 
       <div class="card-body">
-        <button type="button" class="btn btn-danger">Delete account</button>
+        <button type="button" class="btn btn-danger" @click="handleDelete">
+          Delete account
+        </button>
       </div>
 
       <div class="card-body" v-show="updateSuccessful != null">
@@ -71,7 +73,7 @@ export default {
     }
   },
   methods: {
-    ...userModule.mapActions(['updateUser']),
+    ...userModule.mapActions(['updateUser', 'deleteAccount']),
     async formSubmit () {
       try {
         const payload = {
@@ -91,6 +93,18 @@ export default {
         setTimeout(() => {
           this.updateSuccessful = null
         }, 5000)
+      }
+    },
+    async handleDelete () {
+      try {
+        if (confirm('Are you sure you want to delete your account?')) {
+          const userDeleted = await this.deleteAccount()
+          if (userDeleted.data) {
+            console.log('Your account is now deleted.')
+          }
+        }
+      } catch (err) {
+        console.error(err)
       }
     }
   },
