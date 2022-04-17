@@ -40,6 +40,10 @@
         </form>
       </div>
 
+      <div class="card-body">
+        <button type="button" class="btn btn-danger">Delete account</button>
+      </div>
+
       <div class="card-body" v-show="updateSuccessful != null">
         <div class="alert alert-success" role="alert" v-show="updateSuccessful">
           Your profile was updated!
