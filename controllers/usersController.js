@@ -47,5 +47,9 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
-  deleteUser: function (req, res) {}
+  deleteUser: function (req, res) {
+    db.User.deleteOne({ _id: req.params.id })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err))
+  }
 }
