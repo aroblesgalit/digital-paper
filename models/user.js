@@ -45,6 +45,12 @@ userSchema.pre('save', async function save (next) {
   }
 })
 
+userSchema.pre('deleteOne', function (next) {
+  // Delete all the post and comment docs that reference the deleted user
+  this.model('Post').deleteMany({ author: this._id }, next)
+  this.model('Comment').deleteMany({ commenter: this._id }, next)
+})
+
 userSchema.methods.validatePassword = async function validatePassword (data) {
   return bcrypt.compare(data, this.password)
 }
