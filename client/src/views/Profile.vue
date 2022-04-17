@@ -98,10 +98,8 @@ export default {
     async handleDelete () {
       try {
         if (confirm('Are you sure you want to delete your account?')) {
-          const userDeleted = await this.deleteAccount()
-          if (userDeleted.data) {
-            console.log('Your account is now deleted.')
-          }
+          await this.deleteAccount()
+          console.log('Your account is now deleted.')
         }
       } catch (err) {
         console.error(err)

@@ -74,8 +74,10 @@ const userModule = {
     },
     async deleteAccount ({ commit, state }) {
       try {
-        await axios.delete(`/api/user/${state.user._id}`)
-        commit('SET_USER', {})
+        const deletedUser = await axios.delete(`/api/user/${state.user._id}`)
+        if (deletedUser.data) {
+          commit('SET_USER', {})
+        }
       } catch (err) {
         console.error(err)
       }
