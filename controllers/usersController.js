@@ -47,9 +47,12 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
-  deleteUser: function (req, res) {
-    db.User.deleteOne({ _id: req.params.id })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err))
+  deleteUser: async function (req, res) {
+    try {
+      const userToDelete = await db.User.findOne({ _id: req.params.id })
+      await userToDelete.deleteOne()
+    } catch (err) {
+      res.status(422).json(err)
+    }
   }
 }
