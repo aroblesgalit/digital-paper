@@ -20,7 +20,6 @@ export default {
   async created () {
     try {
       await this.getPublicPosts()
-      await this.checkLoginStatus()
     } catch (err) {
       console.error(err)
     }

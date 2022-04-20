@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import createdPersistedState from 'vuex-persistedstate'
 import axios from 'axios'
+import router from '../router'
 
 const userModule = {
   namespaced: true,
@@ -27,17 +28,25 @@ const userModule = {
       try {
         await axios.post('api/user/register', data)
         commit('SET_REGS', 'Congratulations! You have successfully registered.')
+        setTimeout(() => {
+          commit('SET_REGS', null)
+          router.push({ name: 'Login' })
+        }, 3000)
       } catch (err) {
         console.error(err)
         commit(
           'SET_REGS',
           'Oh no, something went wrong! Please try again later.'
         )
+        setTimeout(() => {
+          commit('SET_REGS', null)
+        }, 3000)
       }
     },
     async loginUser (context, data) {
       try {
         await axios.post('api/user/login', data)
+        router.push({ name: 'Home' })
       } catch (err) {
         console.error(err)
       }
@@ -46,7 +55,8 @@ const userModule = {
       try {
         await axios.get('api/user/logout')
         commit('SET_USER', {})
-        commit('SET_REGS', '')
+        commit('SET_REGS', null)
+        router.push({ name: 'Login' })
       } catch (err) {
         console.error(err)
       }
@@ -67,17 +77,18 @@ const userModule = {
       try {
         const response = await axios.get('/api/user/authenticated')
         commit('SET_USER', response.data)
+        router.push({ name: 'Home' })
       } catch (err) {
         console.error(err)
         commit('SET_USER', {})
+        router.push({ name: 'Login' })
       }
     },
     async deleteAccount ({ commit, state }) {
       try {
-        const deletedUser = await axios.delete(`api/user/${state.user._id}`)
-        if (deletedUser.data) {
-          commit('SET_USER', {})
-        }
+        await axios.delete(`api/user/${state.user._id}`)
+        commit('SET_USER', {})
+        router.push({ name: 'Login' })
       } catch (err) {
         console.error(err)
       }

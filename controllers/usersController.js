@@ -51,6 +51,9 @@ module.exports = {
     try {
       const userToDelete = await db.User.findOne({ _id: req.params.id })
       await userToDelete.deleteOne()
+      req.session.destroy(function (err) {
+        res.json({})
+      })
     } catch (err) {
       res.status(422).json(err)
     }

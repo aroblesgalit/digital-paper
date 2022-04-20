@@ -58,7 +58,6 @@ export default {
     async handleLogout () {
       try {
         await this.logoutUser()
-        await this.$router.push({ name: 'Login' })
       } catch (err) {
         console.error(err)
       }
@@ -67,7 +66,6 @@ export default {
       try {
         await this.demoLogin()
         await this.checkLoginStatus()
-        await this.$router.push({ name: 'Home' })
       } catch (err) {
         console.error(err)
       }

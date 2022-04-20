@@ -73,7 +73,11 @@ export default {
     }
   },
   methods: {
-    ...userModule.mapActions(['updateUser', 'deleteAccount']),
+    ...userModule.mapActions([
+      'updateUser',
+      'deleteAccount',
+      'checkLoginStatus'
+    ]),
     async formSubmit () {
       try {
         const payload = {
@@ -99,7 +103,7 @@ export default {
       try {
         if (confirm('Are you sure you want to delete your account?')) {
           await this.deleteAccount()
-          console.log('Your account is now deleted.')
+          await this.checkLoginStatus()
         }
       } catch (err) {
         console.error(err)

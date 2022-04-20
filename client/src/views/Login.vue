@@ -59,7 +59,6 @@ export default {
           password: this.password
         })
         await this.checkLoginStatus()
-        await this.$router.push({ name: 'Home' })
       } catch (err) {
         console.error(err)
       }
