@@ -187,6 +187,7 @@ const commentModule = {
   state: {},
   mutations: {},
   actions: {
+    // Delete comment from post.comments when user is deleted
     async createComment ({ commit, rootState }, payload) {
       try {
         const newComment = await axios.post('api/comments', {

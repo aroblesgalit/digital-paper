@@ -47,7 +47,18 @@ userSchema.pre('save', async function save (next) {
 
 userSchema.pre('deleteOne', { document: true, query: false }, function (next) {
   // Delete all the post and comment docs that reference the deleted user
+  // Delete all comments from user's deleted posts
+  // Delete comments by this user from other user's posts
   this.model('Post').deleteMany({ author: this._id }, next)
+  const commentsByUser = this.model('Comments').findAll({
+    commenter: { $in: [this.id] }
+  })
+  // this.model('Post').updateMany(
+  //   { comments: { $in: [this._id] } },
+  //   { $pullAll: { comments: this._id } },
+  //   next
+  // )
+  console.log(commentsByUser)
   this.model('Comment').deleteMany({ commenter: this._id }, next)
 })
 
