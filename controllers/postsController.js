@@ -37,10 +37,17 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
-  deletePost: function (req, res) {
-    db.Post.deleteOne({ _id: req.params.id })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err))
+  deletePost: async function (req, res) {
+    try {
+      const postToDelete = await db.Post.findOne({ _id: req.params.id })
+      await postToDelete.deleteOne()
+      res.json(postToDelete)
+    } catch (err) {
+      res.status(422).json(err)
+    }
+    // db.Post.deleteOne({ _id: req.params.id })
+    //   .then(dbModel => res.json(dbModel))
+    //   .catch(err => res.status(422).json(err))
   },
   getPostById: function (req, res) {
     db.Post.findOne({ _id: req.params.id })
