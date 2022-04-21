@@ -44,6 +44,10 @@ const postSchema = new Schema(
   { timestamps: true }
 )
 
+postSchema.pre('deleteOne', { document: true, query: false }, function (next) {
+  this.model('Comment').deleteMany({ _id: { $in: this.comments } }, next)
+})
+
 const Post = mongoose.model('Post', postSchema)
 
 module.exports = Post
