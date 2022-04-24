@@ -71,7 +71,17 @@ userSchema.pre('deleteOne', { document: true, query: false }, async function (
     //   })
     //   .catch(err => console.error(err))
     // First, delete user's comments from all posts' comments array
-
+    const userComments = await Comment.find({ author: this._id })
+    userComments.forEach(comment => {
+      Post.updateMany(
+        { comments: { $in: comment._id } },
+        { $pull: { comments: [comment._id] } },
+        function (err, res) {
+          if (err) return next(err)
+          next()
+        }
+      )
+    })
     // allComments.then(comment => {
     //   await this.model('Post').updateMany(
     //     { comments: { $in: comment._id} },
@@ -98,7 +108,7 @@ userSchema.pre('deleteOne', { document: true, query: false }, async function (
 
     // Third, delete all the posts and comments that reference the deleted user
 
-    // Deletes user's post docs but not the posts' comments
+    // Deletes user's post docs but not the posts' comments arrays
     this.model('Post').deleteMany({ author: this._id }, function (err, result) {
       if (err) return next(err)
       // db.Comment.deleteMany({ _id: { $in: result.comments } })
