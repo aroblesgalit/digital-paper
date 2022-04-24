@@ -85,22 +85,22 @@ userSchema.pre('deleteOne', { document: true, query: false }, async function (
 
     // Second, delete all comment docs from user's posts
     const userPosts = await Post.find({ author: this._id })
-    console.log(userPosts)
-    userPosts.forEach(post =>
-      Comment.deleteMany({ _id: { $in: post.comments } })
-    )
-    // this.model('Comment').deleteMany(
-    //   {
-    //     _id: { $in: this.model('Post').comments }
-    //   },
-    //   next
-    // )
+    userPosts.forEach(post => {
+      console.log(post)
+      Comment.deleteMany({ _id: { $in: post.comments } }, function (
+        err,
+        result
+      ) {
+        if (err) return next(err)
+        next()
+      })
+    })
+
     // Third, delete all the posts and comments that reference the deleted user
 
     // Deletes user's post docs but not the posts' comments
     this.model('Post').deleteMany({ author: this._id }, function (err, result) {
-      // if (err) return next(err)
-      console.log(result)
+      if (err) return next(err)
       // db.Comment.deleteMany({ _id: { $in: result.comments } })
       next()
     })
