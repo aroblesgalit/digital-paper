@@ -52,6 +52,7 @@ userSchema.pre('deleteOne', { document: true, query: false }, async function (
 ) {
   try {
     // First, delete user's comments from all posts' comments array
+    // Fix error => this currently pulls all comments and not just user's comments
     const userComments = await Comment.find({ author: this._id })
     userComments.forEach(comment => {
       Post.updateMany(
@@ -64,6 +65,7 @@ userSchema.pre('deleteOne', { document: true, query: false }, async function (
       )
     })
     // Second, delete all comment docs from user's posts
+    // Fix error => this did not delete comment docs, but doesn't always
     const userPosts = await Post.find({ author: this._id })
     userPosts.forEach(post => {
       Comment.deleteMany({ _id: { $in: post.comments } }, function (
