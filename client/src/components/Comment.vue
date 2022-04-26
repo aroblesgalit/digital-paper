@@ -27,7 +27,7 @@
         v-if="isAuthenticated && user._id === comment.commenter._id"
       >
         <span class="bi bi-pencil me-3"></span>
-        <span class="bi bi-trash3"></span>
+        <span class="bi bi-trash3" @click="onDelete(comment._id)"></span>
       </div>
     </div>
   </div>
@@ -36,11 +36,24 @@
 <script>
 import { createNamespacedHelpers } from 'vuex'
 const userModule = createNamespacedHelpers('user')
+const commentModule = createNamespacedHelpers('comment')
 
 export default {
   name: 'Comment',
   props: {
     comment: Object
+  },
+  methods: {
+    ...commentModule.mapActions(['deleteComment']),
+    async onDelete (id) {
+      try {
+        if (confirm('Are you sure you want to delete this comment?')) {
+          await this.deleteComment(id)
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    }
   },
   computed: {
     ...userModule.mapState(['user']),
