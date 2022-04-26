@@ -10,16 +10,22 @@
         {{ comment.commenter.username.split('')[0] }}
       </div>
     </div>
-    <div class="mt-1">
-      <h4>
-        {{
-          comment.commenter.firstName && comment.commenter.lastName
-            ? comment.commenter.firstName + ' ' + comment.commenter.lastName
-            : comment.commenter.username
-        }}
-      </h4>
-      <span>{{ formattedTime }}</span>
-      <p>{{ comment.body }}</p>
+    <div class="mt-1 d-flex justify-content-between w-100">
+      <div>
+        <h4>
+          {{
+            comment.commenter.firstName && comment.commenter.lastName
+              ? comment.commenter.firstName + ' ' + comment.commenter.lastName
+              : comment.commenter.username
+          }}
+        </h4>
+        <span>{{ formattedTime }}</span>
+        <p>{{ comment.body }}</p>
+      </div>
+      <div>
+        <span class="bi bi-pencil me-3"></span>
+        <span class="bi bi-trash3"></span>
+      </div>
     </div>
   </div>
 </template>
