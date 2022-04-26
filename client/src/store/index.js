@@ -187,7 +187,6 @@ const commentModule = {
   state: {},
   mutations: {},
   actions: {
-    // Delete comment from post.comments when user is deleted
     async createComment ({ commit, rootState }, payload) {
       try {
         const newComment = await axios.post('api/comments', {
@@ -205,6 +204,13 @@ const commentModule = {
         )
         currentPublicPosts.splice(indexOfPostToUpdate, 1, updatedPost.data)
         commit('post/SET_PUBLIC_POSTS', currentPublicPosts, { root: true })
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    async deleteComment (context, payload) {
+      try {
+        await axios.delete(`api/comments/${payload}`)
       } catch (err) {
         console.error(err)
       }
