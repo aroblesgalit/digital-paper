@@ -22,7 +22,7 @@
         <span>{{ formattedTime }}</span>
         <p>{{ comment.body }}</p>
       </div>
-      <div>
+      <div class="comment-tools">
         <span class="bi bi-pencil me-3"></span>
         <span class="bi bi-trash3"></span>
       </div>
@@ -99,5 +99,14 @@ span {
 p {
   font-size: 14px;
   margin: 0;
+}
+.comment-tools {
+  display: none;
+}
+.comment-wrapper:hover .comment-tools {
+  display: block;
+}
+.comment-tools > span {
+  cursor: pointer;
 }
 </style>
