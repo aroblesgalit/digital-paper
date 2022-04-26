@@ -22,7 +22,10 @@
         <span>{{ formattedTime }}</span>
         <p>{{ comment.body }}</p>
       </div>
-      <div class="comment-tools">
+      <div
+        class="comment-tools"
+        v-if="isAuthenticated && user._id === comment.commenter._id"
+      >
         <span class="bi bi-pencil me-3"></span>
         <span class="bi bi-trash3"></span>
       </div>
@@ -31,12 +34,17 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const userModule = createNamespacedHelpers('user')
+
 export default {
   name: 'Comment',
   props: {
     comment: Object
   },
   computed: {
+    ...userModule.mapState(['user']),
+    ...userModule.mapGetters(['isAuthenticated']),
     formattedTime () {
       let datePosted = new Date(this.comment.createdAt)
       let dateNow = new Date()
