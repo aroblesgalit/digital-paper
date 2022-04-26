@@ -208,9 +208,23 @@ const commentModule = {
         console.error(err)
       }
     },
-    async deleteComment (context, payload) {
+    async deleteComment ({ commit, rootState }, payload) {
       try {
         await axios.delete(`api/comments/${payload}`)
+        // Delete comment from Post comments array in frontend
+        const currentPublicPosts = [...rootState.post.publicPosts]
+        let indexOfPostToUpdate = currentPublicPosts.findIndex(post =>
+          post.comments.filter(comment => comment._id === payload)
+        )
+        console.log(indexOfPostToUpdate) // Working but not always
+        const indexOfCommentToDelete = currentPublicPosts[
+          indexOfPostToUpdate
+        ].comments.findIndex(comment => comment._id === payload)
+        currentPublicPosts[indexOfPostToUpdate].comments.splice(
+          indexOfCommentToDelete,
+          1
+        )
+        commit('post/SET_PUBLIC_POSTS', currentPublicPosts, { root: true })
       } catch (err) {
         console.error(err)
       }
