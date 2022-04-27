@@ -216,7 +216,6 @@ const commentModule = {
         let indexOfPostToUpdate = currentPublicPosts.findIndex(
           post => post.comments.filter(comment => comment._id === payload)[0]
         )
-        console.log(indexOfPostToUpdate) // Always 0
         const indexOfCommentToDelete = currentPublicPosts[
           indexOfPostToUpdate
         ].comments.findIndex(comment => comment._id === payload)
