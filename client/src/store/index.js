@@ -213,10 +213,10 @@ const commentModule = {
         await axios.delete(`api/comments/${payload}`)
         // Delete comment from Post comments array in frontend
         const currentPublicPosts = [...rootState.post.publicPosts]
-        let indexOfPostToUpdate = currentPublicPosts.findIndex(post =>
-          post.comments.filter(comment => comment._id === payload)
+        let indexOfPostToUpdate = currentPublicPosts.findIndex(
+          post => post.comments.filter(comment => comment._id === payload)[0]
         )
-        console.log(indexOfPostToUpdate) // Working but not always
+        console.log(indexOfPostToUpdate) // Always 0
         const indexOfCommentToDelete = currentPublicPosts[
           indexOfPostToUpdate
         ].comments.findIndex(comment => comment._id === payload)
