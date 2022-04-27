@@ -7,6 +7,7 @@ router.route('/').post(commentsController.createComment)
 // Match with '/api/comments/:id'
 router
   .route('/:id')
+  .get(commentsController.getCommentById)
   .delete(commentsController.deleteComment)
   .put(commentsController.updateComment)
 
