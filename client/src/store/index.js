@@ -184,8 +184,14 @@ const postModule = {
 
 const commentModule = {
   namespaced: true,
-  state: {},
-  mutations: {},
+  state: {
+    commentToEdit: {},
+    updateSuccessful: null
+  },
+  mutations: {
+    SET_COMMENT_TO_EDIT: (state, payload) => (state.commentToEdit = payload),
+    SET_UPDATE_STAT: (state, payload) => (state.updateSuccessful = payload)
+  },
   actions: {
     async createComment ({ commit, rootState }, payload) {
       try {
@@ -204,6 +210,35 @@ const commentModule = {
         )
         currentPublicPosts.splice(indexOfPostToUpdate, 1, updatedPost.data)
         commit('post/SET_PUBLIC_POSTS', currentPublicPosts, { root: true })
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    async updateComment ({ commit, rootState }, payload) {
+      try {
+        const updatedComment = await axios.put(
+          `/api/comments/${payload._id}`,
+          payload
+        )
+        // Update comment in post comments array
+        const currentPublicPosts = [...rootState.post.publicPosts]
+        let indexOfPostToUpdate = currentPublicPosts.findIndex(
+          post =>
+            post.comments.filter(comment => comment._id === payload._id)[0]
+        )
+        let indexOfCommentToUpdate = currentPublicPosts[
+          indexOfPostToUpdate
+        ].comments.findIndex(comment => comment._id === payload._id)
+        currentPublicPosts[indexOfPostToUpdate].comments.splice(
+          indexOfCommentToUpdate,
+          1,
+          updatedComment.data
+        )
+        commit('post/SET_PUBLIC_POSTS', currentPublicPosts, { root: true })
+        commit('SET_UPDATE_STAT', true)
+        setTimeout(() => {
+          commit('SET_UPDATE_STAT', null)
+        }, 3000)
       } catch (err) {
         console.error(err)
       }
