@@ -214,6 +214,14 @@ const commentModule = {
         console.error(err)
       }
     },
+    async setCommentToEdit ({ commit }, payload) {
+      try {
+        const result = await axios.get(`api/comments/${payload}`)
+        commit('SET_COMMENT_TO_EDIT', result.data)
+      } catch (err) {
+        console.error(err)
+      }
+    },
     async updateComment ({ commit, rootState }, payload) {
       try {
         const updatedComment = await axios.put(
