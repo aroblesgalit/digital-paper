@@ -26,7 +26,7 @@
         class="comment-tools"
         v-if="isAuthenticated && user._id === comment.commenter._id"
       >
-        <span class="bi bi-pencil me-3"></span>
+        <span class="bi bi-pencil me-3" @click="onEdit(comment._id)"></span>
         <span class="bi bi-trash3" @click="onDelete(comment._id)"></span>
       </div>
     </div>
@@ -44,12 +44,19 @@ export default {
     comment: Object
   },
   methods: {
-    ...commentModule.mapActions(['deleteComment']),
+    ...commentModule.mapActions(['deleteComment', 'setCommentToEdit']),
     async onDelete (id) {
       try {
         if (confirm('Are you sure you want to delete this comment?')) {
           await this.deleteComment(id)
         }
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    async onEdit (id) {
+      try {
+        await this.setCommentToEdit(id)
       } catch (err) {
         console.error(err)
       }
