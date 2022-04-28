@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="mt-1 d-flex justify-content-between w-100">
-      <div>
+      <div class="w-100">
         <h4>
           {{
             comment.commenter.firstName && comment.commenter.lastName
@@ -37,9 +37,13 @@
               placeholder="Write a comment..."
               required
             />
-            <span class="input-group-text"><i class="bi bi-send"></i></span>
+            <span class="input-group-text"
+              ><i class="bi bi-send-check"></i
+            ></span>
+            <span class="input-group-text"
+              ><i class="bi bi-x-circle" @click="unsetCommentToEdit"></i
+            ></span>
           </div>
-          <div @click="unsetCommentToEdit">cancel</div>
         </form>
         <p v-else>{{ comment.body }}</p>
       </div>
