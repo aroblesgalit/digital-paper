@@ -223,6 +223,9 @@ const commentModule = {
         console.error(err)
       }
     },
+    unsetCommentToEdit ({ commit }) {
+      commit('SET_COMMENT_TO_EDIT', {})
+    },
     async updateComment ({ commit, rootState }, payload) {
       try {
         const updatedComment = await axios.put(

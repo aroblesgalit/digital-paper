@@ -23,7 +23,8 @@
         <form
           v-if="
             Object.keys(commentToEdit).length > 0 &&
-              commentToEdit._id === comment._id
+              commentToEdit._id === comment._id &&
+              isAuthenticated && user._id === comment.commenter._id
           "
         >
           <label class="visually-hidden" for="comment-body">Comment</label>
@@ -37,6 +38,7 @@
             />
             <span class="input-group-text"><i class="bi bi-send"></i></span>
           </div>
+          <div>cancel</div>
         </form>
         <p v-else>{{ comment.body }}</p>
       </div>
