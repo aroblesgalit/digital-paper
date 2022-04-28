@@ -24,7 +24,8 @@
           v-if="
             Object.keys(commentToEdit).length > 0 &&
               commentToEdit._id === comment._id &&
-              isAuthenticated && user._id === comment.commenter._id
+              isAuthenticated &&
+              user._id === comment.commenter._id
           "
         >
           <label class="visually-hidden" for="comment-body">Comment</label>
@@ -38,13 +39,17 @@
             />
             <span class="input-group-text"><i class="bi bi-send"></i></span>
           </div>
-          <div>cancel</div>
+          <div @click="unsetCommentToEdit">cancel</div>
         </form>
         <p v-else>{{ comment.body }}</p>
       </div>
       <div
         class="comment-tools"
-        v-if="isAuthenticated && user._id === comment.commenter._id"
+        v-show="
+          isAuthenticated &&
+            user._id === comment.commenter._id &&
+            Object.keys(commentToEdit).length === 0
+        "
       >
         <span class="bi bi-pencil me-3" @click="onEdit(comment._id)"></span>
         <span class="bi bi-trash3" @click="onDelete(comment._id)"></span>
@@ -64,7 +69,11 @@ export default {
     comment: Object
   },
   methods: {
-    ...commentModule.mapActions(['deleteComment', 'setCommentToEdit']),
+    ...commentModule.mapActions([
+      'deleteComment',
+      'setCommentToEdit',
+      'unsetCommentToEdit'
+    ]),
     async onDelete (id) {
       try {
         if (confirm('Are you sure you want to delete this comment?')) {
