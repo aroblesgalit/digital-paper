@@ -20,7 +20,25 @@
           }}
         </h4>
         <span>{{ formattedTime }}</span>
-        <p>{{ comment.body }}</p>
+        <form
+          v-if="
+            Object.keys(commentToEdit).length > 0 &&
+              commentToEdit._id === comment._id
+          "
+        >
+          <label class="visually-hidden" for="comment-body">Comment</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="comment-body"
+              placeholder="Write a comment..."
+              required
+            />
+            <span class="input-group-text"><i class="bi bi-send"></i></span>
+          </div>
+        </form>
+        <p v-else>{{ comment.body }}</p>
       </div>
       <div
         class="comment-tools"
@@ -65,6 +83,7 @@ export default {
   computed: {
     ...userModule.mapState(['user']),
     ...userModule.mapGetters(['isAuthenticated']),
+    ...commentModule.mapState(['commentToEdit']),
     formattedTime () {
       let datePosted = new Date(this.comment.createdAt)
       let dateNow = new Date()
