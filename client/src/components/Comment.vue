@@ -31,6 +31,7 @@
           <label class="visually-hidden" for="comment-body">Comment</label>
           <div class="input-group">
             <input
+              v-model="body"
               type="text"
               class="form-control"
               id="comment-body"
@@ -72,6 +73,11 @@ export default {
   props: {
     comment: Object
   },
+  data () {
+    return {
+      body: ''
+    }
+  },
   methods: {
     ...commentModule.mapActions([
       'deleteComment',
@@ -90,6 +96,7 @@ export default {
     async onEdit (id) {
       try {
         await this.setCommentToEdit(id)
+        this.body = this.commentToEdit.body
       } catch (err) {
         console.error(err)
       }
