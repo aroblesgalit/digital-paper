@@ -40,8 +40,8 @@
             <span class="input-group-text"
               ><i class="bi bi-send-check"></i
             ></span>
-            <span class="input-group-text"
-              ><i class="bi bi-x-circle" @click="unsetCommentToEdit"></i
+            <span class="input-group-text" @click="unsetCommentToEdit"
+              ><i class="bi bi-x-circle"></i
             ></span>
           </div>
         </form>
@@ -170,5 +170,22 @@ p {
 }
 .comment-tools > span {
   cursor: pointer;
+}
+form {
+  width: 100%;
+}
+input {
+  border-right: none;
+}
+.input-group-text {
+  cursor: pointer;
+  background-color: #ffffff;
+  border-left: none;
+}
+.input-group-text:hover .bi-send-check {
+  color: rgb(134, 189, 80);
+}
+.input-group-text:hover .bi-x-circle {
+  color: rgb(228, 111, 102);
 }
 </style>

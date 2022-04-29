@@ -48,7 +48,7 @@
           <span class="bi bi-heart">&nbsp;{{ post.likes.length }}</span>
         </div>
         <div>
-          <span class="bi bi-chat" @click="showComments = !showComments"
+          <span class="bi bi-chat" @click="toggleComments"
             >&nbsp;{{ post.comments.length }}</span
           >
         </div>
@@ -78,6 +78,7 @@ import CommentInput from './CommentInput.vue'
 import Comment from './Comment.vue'
 import { createNamespacedHelpers } from 'vuex'
 const userModule = createNamespacedHelpers('user')
+const commentModule = createNamespacedHelpers('comment')
 
 export default {
   name: 'Post',
@@ -93,6 +94,13 @@ export default {
       readMore: false,
       showLink: false,
       showComments: false
+    }
+  },
+  methods: {
+    ...commentModule.mapActions(['unsetCommentToEdit']),
+    toggleComments () {
+      this.showComments = !this.showComments
+      this.unsetCommentToEdit()
     }
   },
   mounted () {
