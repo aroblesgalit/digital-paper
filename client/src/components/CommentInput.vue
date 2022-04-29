@@ -20,6 +20,7 @@
           id="comment-body"
           placeholder="Write a comment..."
           required
+          @click="unsetCommentToEdit"
         />
         <span @click="formSubmit" class="input-group-text"
           ><i class="bi bi-send"></i
@@ -45,7 +46,7 @@ export default {
     }
   },
   methods: {
-    ...commentModule.mapActions(['createComment']),
+    ...commentModule.mapActions(['createComment', 'unsetCommentToEdit']),
     async formSubmit () {
       try {
         if (!this.body) return
