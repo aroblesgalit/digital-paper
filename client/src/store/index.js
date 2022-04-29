@@ -231,6 +231,8 @@ const commentModule = {
           `/api/comments/${payload._id}`,
           payload
         )
+        const commenterPopulated = rootState.user.user
+        updatedComment.data.commenter = commenterPopulated
         // Update comment in post comments array
         const currentPublicPosts = [...rootState.post.publicPosts]
         let indexOfPostToUpdate = currentPublicPosts.findIndex(
@@ -248,7 +250,6 @@ const commentModule = {
         commit('post/SET_PUBLIC_POSTS', currentPublicPosts, { root: true })
         commit('SET_UPDATE_STAT', true)
         setTimeout(() => {
-          commit('SET_COMMENT_TO_EDIT', {})
           commit('SET_UPDATE_STAT', null)
         }, 3000)
       } catch (err) {

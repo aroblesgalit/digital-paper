@@ -21,6 +21,7 @@
         </h4>
         <span>{{ formattedTime }}</span>
         <form
+          @submit.prevent="formSubmit"
           v-if="
             Object.keys(commentToEdit).length > 0 &&
               commentToEdit._id === comment._id &&
@@ -38,7 +39,7 @@
               placeholder="Write a comment..."
               required
             />
-            <span class="input-group-text" @click="saveEdit"
+            <span class="input-group-text" @click="formSubmit"
               ><i class="bi bi-send-check"></i
             ></span>
             <span class="input-group-text" @click="unsetCommentToEdit"
@@ -83,7 +84,8 @@ export default {
     ...commentModule.mapActions([
       'deleteComment',
       'setCommentToEdit',
-      'unsetCommentToEdit'
+      'unsetCommentToEdit',
+      'updateComment'
     ]),
     async onDelete (id) {
       try {
@@ -102,9 +104,11 @@ export default {
         console.error(err)
       }
     },
-    async saveEdit () {
+    async formSubmit () {
       try {
-        console.log(this.body)
+        if (this.commentEditMode.body == this.comment.body) return
+        await this.updateComment(this.commentEditMode)
+        this.unsetCommentToEdit()
       } catch (err) {
         console.error(err)
       }
