@@ -222,7 +222,8 @@ const commentModule = {
         console.error(err)
       }
     },
-    unsetCommentToEdit ({ commit }) {
+    unsetCommentToEdit ({ commit, state }) {
+      if (Object.keys(state.commentToEdit).length === 0) return
       commit('SET_COMMENT_TO_EDIT', {})
     },
     async updateComment ({ commit, rootState }, payload) {
