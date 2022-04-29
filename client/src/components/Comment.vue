@@ -53,7 +53,8 @@
         v-show="
           isAuthenticated &&
             user._id === comment.commenter._id &&
-            Object.keys(commentToEdit).length === 0
+            (Object.keys(commentToEdit).length === 0 ||
+              commentToEdit._id != comment._id)
         "
       >
         <span class="bi bi-pencil me-3" @click="onEdit(comment._id)"></span>
