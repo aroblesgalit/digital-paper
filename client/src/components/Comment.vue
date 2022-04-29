@@ -31,14 +31,14 @@
           <label class="visually-hidden" for="comment-body">Comment</label>
           <div class="input-group">
             <input
-              v-model="body"
+              v-model="commentEditMode.body"
               type="text"
               class="form-control"
               id="comment-body"
               placeholder="Write a comment..."
               required
             />
-            <span class="input-group-text"
+            <span class="input-group-text" @click="saveEdit"
               ><i class="bi bi-send-check"></i
             ></span>
             <span class="input-group-text" @click="unsetCommentToEdit"
@@ -75,7 +75,7 @@ export default {
   },
   data () {
     return {
-      body: ''
+      commentEditMode: {}
     }
   },
   methods: {
@@ -96,7 +96,14 @@ export default {
     async onEdit (id) {
       try {
         await this.setCommentToEdit(id)
-        this.body = this.commentToEdit.body
+        this.commentEditMode = this.commentToEdit
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    async saveEdit () {
+      try {
+        console.log(this.body)
       } catch (err) {
         console.error(err)
       }
