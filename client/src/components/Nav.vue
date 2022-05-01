@@ -123,4 +123,7 @@ img {
   font-size: 80px;
   overflow: hidden;
 }
+.dropdown-menu {
+  right: 0;
+}
 </style>
