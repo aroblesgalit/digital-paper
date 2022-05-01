@@ -15,20 +15,13 @@
           <li v-if="isAuthenticated" class="nav-item">
             <router-link class="nav-link" to="/">Favorites</router-link>
           </li>
-          <li v-if="isAuthenticated" class="nav-item">
+          <!-- <li v-if="isAuthenticated" class="nav-item">
             <router-link class="nav-link" to="/profile">Profile</router-link>
+          </li> -->
+          <li v-if="!isAuthenticated" class="nav-item">
+            <router-link class="nav-link" to="/login">Login</router-link>
           </li>
-          <li class="nav-item">
-            <a
-              v-if="isAuthenticated"
-              @click="handleLogout"
-              class="nav-link"
-              href="#"
-              >Logout</a
-            >
-            <router-link v-else class="nav-link" to="/login">Login</router-link>
-          </li>
-          <li v-if="isAuthenticated" class="nav-item d-flex align-items-center">
+          <!-- <li v-if="isAuthenticated" class="nav-item d-flex align-items-center">
             <img v-if="user.image" :src="user.image" alt="User avatar" />
             <div v-else class="avatar">
               {{
@@ -37,6 +30,40 @@
                   : user.username.split('')[0]
               }}
             </div>
+          </li> -->
+          <li
+            v-if="isAuthenticated"
+            class="nav-item dropdown d-flex align-items-center"
+          >
+            <a
+              href="#"
+              id="navbarDropdown"
+              class="nav-link dropdown-toggle"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img v-if="user.image" :src="user.image" alt="User avatar" />
+              <div v-else class="avatar">
+                {{
+                  user.firstName
+                    ? user.firstName.split('')[0]
+                    : user.username.split('')[0]
+                }}
+              </div>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <router-link class="dropdown-item" to="/profile"
+                  >Profile</router-link
+                >
+              </li>
+              <li>
+                <a @click="handleLogout" class="dropdown-item" href="#"
+                  >Logout</a
+                >
+              </li>
+            </ul>
           </li>
           <li v-if="!isAuthenticated" class="nav-item">
             <a href="#" class="nav-link" @click="handleDemoLogin">Demo login</a>
