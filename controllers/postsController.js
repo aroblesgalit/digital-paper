@@ -76,5 +76,18 @@ module.exports = {
       ])
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
+  },
+  likePost: function (req, res) {
+    db.Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {
+          likes: req.body._id
+        }
+      },
+      { new: true }
+    )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err))
   }
 }
