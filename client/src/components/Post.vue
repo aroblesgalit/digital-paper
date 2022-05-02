@@ -45,7 +45,9 @@
       </p>
       <div class="d-flex mb-3">
         <div class="me-4">
-          <span class="bi bi-heart">&nbsp;{{ post.likes.length }}</span>
+          <span class="bi bi-heart" @click="toggleLike"
+            >&nbsp;{{ post.likes.length }}</span
+          >
         </div>
         <div>
           <span class="bi bi-chat" @click="toggleComments"
@@ -79,6 +81,7 @@ import Comment from './Comment.vue'
 import { createNamespacedHelpers } from 'vuex'
 const userModule = createNamespacedHelpers('user')
 const commentModule = createNamespacedHelpers('comment')
+const postModule = createNamespacedHelpers('post')
 
 export default {
   name: 'Post',
@@ -98,9 +101,20 @@ export default {
   },
   methods: {
     ...commentModule.mapActions(['unsetCommentToEdit']),
+    ...postModule.mapActions(['likePost']),
     toggleComments () {
       this.showComments = !this.showComments
       this.unsetCommentToEdit()
+    },
+    async toggleLike () {
+      try {
+        await likePost({
+          postId: this.post._id,
+          userId: this.user._id
+        })
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   mounted () {
