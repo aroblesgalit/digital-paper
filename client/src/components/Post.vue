@@ -113,6 +113,7 @@ export default {
     },
     async toggleLike () {
       try {
+        if (!this.isAuthenticated) return
         await this.likePost({
           postId: this.post._id,
           userId: this.user._id
