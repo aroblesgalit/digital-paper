@@ -82,7 +82,7 @@ module.exports = {
       req.params.id,
       {
         $push: {
-          likes: req.body._id
+          likes: req.body.userId
         }
       },
       { new: true }
