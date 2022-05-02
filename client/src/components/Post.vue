@@ -45,7 +45,12 @@
       </p>
       <div class="d-flex mb-3">
         <div class="me-4">
-          <span class="bi bi-heart" @click="toggleLike"
+          <span
+            :class="[
+              'bi',
+              post.likes.includes(user._id) ? 'bi-heart-fill' : 'bi-heart'
+            ]"
+            @click="toggleLike"
             >&nbsp;{{ post.likes.length }}</span
           >
         </div>
