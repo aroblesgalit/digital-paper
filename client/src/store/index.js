@@ -178,7 +178,7 @@ const postModule = {
         }, 3000)
       }
     },
-    async likePost ({ state }, payload) {
+    async likePost ({ commit, state }, payload) {
       try {
         console.log(payload)
         let currentPosts = [...state.publicPosts]
@@ -187,7 +187,8 @@ const postModule = {
         )
         console.log(indexOfPost)
         if (currentPosts[indexOfPost].likes.includes(payload.userId)) return
-        console.log('You liked a post!')
+        currentPosts[indexOfPost].likes.push(payload.userId)
+        commit('SET_PUBLIC_POSTS', currentPosts)
         // await axios.patch(`/api/posts/likes/${payload.postId}`, payload)
       } catch (err) {
         console.error(err)
