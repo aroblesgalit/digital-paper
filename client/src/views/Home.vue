@@ -21,7 +21,7 @@ export default {
     try {
       await this.getPublicPosts()
     } catch (err) {
-      console.error(err)
+      console.error(err.message)
     }
   },
   computed: {

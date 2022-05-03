@@ -44,7 +44,7 @@ export default {
         _id: this.user._id
       })
     } catch (err) {
-      console.error(err)
+      console.error(err.message)
     }
   },
   computed: {

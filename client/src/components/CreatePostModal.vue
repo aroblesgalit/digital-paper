@@ -161,7 +161,7 @@ export default {
           this.created = null
           this.updateHeight()
         }, 3000)
-        console.error(err)
+        console.error(err.message)
       }
     },
     updateHeight () {

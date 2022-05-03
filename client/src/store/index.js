@@ -21,7 +21,7 @@ const userModule = {
           password: 'pass123'
         })
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async registerUser ({ commit }, data) {
@@ -33,7 +33,7 @@ const userModule = {
           router.push({ name: 'Login' })
         }, 3000)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
         commit(
           'SET_REGS',
           'Oh no, something went wrong! Please try again later.'
@@ -48,7 +48,7 @@ const userModule = {
         await axios.post('api/user/login', data)
         router.push({ name: 'Home' })
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async logoutUser ({ commit }) {
@@ -58,7 +58,7 @@ const userModule = {
         commit('SET_REGS', null)
         router.push({ name: 'Login' })
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async updateUser ({ commit, state }, payload) {
@@ -70,7 +70,7 @@ const userModule = {
         let currentUserState = { ...state.user, ...updatedUser.data }
         commit('SET_USER', currentUserState)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async checkLoginStatus ({ commit }) {
@@ -79,7 +79,7 @@ const userModule = {
         commit('SET_USER', response.data)
         router.push({ name: 'Home' })
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
         commit('SET_USER', {})
         router.push({ name: 'Login' })
       }
@@ -90,7 +90,7 @@ const userModule = {
         commit('SET_USER', {})
         router.push({ name: 'Login' })
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     }
   },
@@ -121,7 +121,7 @@ const postModule = {
         const publicPosts = await axios.get('api/posts')
         commit('SET_PUBLIC_POSTS', publicPosts.data)
       } catch (err) {
-        console.log(err)
+        console.log(err.message)
       }
     },
     async getUserPosts ({ commit }, payload) {
@@ -129,7 +129,7 @@ const postModule = {
         const userPosts = await axios.get(`api/posts/user/${payload._id}`)
         commit('SET_USER_POSTS', userPosts.data)
       } catch (err) {
-        console.log(err)
+        console.log(err.message)
       }
     },
     async createPost ({ commit, state }, payload) {
@@ -137,7 +137,7 @@ const postModule = {
         const newPost = await axios.post('api/posts', payload)
         commit('SET_USER_POSTS', [newPost.data, ...state.userPosts])
       } catch (err) {
-        console.log(err)
+        console.log(err.message)
       }
     },
     async deletePost ({ commit, state }, payload) {
@@ -148,7 +148,7 @@ const postModule = {
         userPosts.splice(index, 1)
         commit('SET_USER_POSTS', userPosts)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async setPostToEdit ({ commit }, payload) {
@@ -156,7 +156,7 @@ const postModule = {
         const result = await axios.get(`api/posts/${payload}`)
         commit('SET_POST_TO_EDIT', result.data)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async updatePost ({ commit, state }, payload) {
@@ -171,7 +171,7 @@ const postModule = {
           commit('SET_UPDATE_STAT', null)
         }, 3000)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
         commit('SET_UPDATE_STAT', false)
         setTimeout(() => {
           commit('SET_UPDATE_STAT', null)
@@ -189,7 +189,7 @@ const postModule = {
         commit('SET_PUBLIC_POSTS', currentPosts)
         await axios.patch(`/api/posts/like/${payload.postId}`, payload)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async unlikePost ({ commit, state }, payload) {
@@ -206,7 +206,7 @@ const postModule = {
         commit('SET_PUBLIC_POSTS', currentPosts)
         await axios.patch(`/api/posts/unlike/${payload.postId}`, payload)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     }
   },
@@ -242,7 +242,7 @@ const commentModule = {
         currentPublicPosts.splice(indexOfPostToUpdate, 1, updatedPost.data)
         commit('post/SET_PUBLIC_POSTS', currentPublicPosts, { root: true })
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async setCommentToEdit ({ commit }, payload) {
@@ -250,7 +250,7 @@ const commentModule = {
         const result = await axios.get(`api/comments/${payload}`)
         commit('SET_COMMENT_TO_EDIT', result.data)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     unsetCommentToEdit ({ commit, state }) {
@@ -285,7 +285,7 @@ const commentModule = {
           commit('SET_UPDATE_STAT', null)
         }, 3000)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async deleteComment ({ commit, rootState }, payload) {
@@ -305,7 +305,7 @@ const commentModule = {
         )
         commit('post/SET_PUBLIC_POSTS', currentPublicPosts, { root: true })
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     }
   },

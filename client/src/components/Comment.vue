@@ -93,7 +93,7 @@ export default {
           await this.deleteComment(id)
         }
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async onEdit (id) {
@@ -101,7 +101,7 @@ export default {
         await this.setCommentToEdit(id)
         this.commentEditMode = this.commentToEdit
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async formSubmit () {
@@ -110,7 +110,7 @@ export default {
         await this.updateComment(this.commentEditMode)
         this.unsetCommentToEdit()
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     }
   },

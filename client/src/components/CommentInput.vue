@@ -58,7 +58,7 @@ export default {
         await this.createComment(payload)
         this.body = ''
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     }
   },

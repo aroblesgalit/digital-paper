@@ -42,7 +42,7 @@ export default {
           })
         }
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async onEdit (id) {
@@ -50,7 +50,7 @@ export default {
         await this.setPostToEdit(id)
         await this.$router.push({ name: 'EditPost', params: { id: id } })
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     }
   },

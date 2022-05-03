@@ -92,7 +92,7 @@ export default {
           this.updateSuccessful = null
         }, 5000)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
         this.updateSuccessful = false
         setTimeout(() => {
           this.updateSuccessful = null
@@ -106,7 +106,7 @@ export default {
           await this.checkLoginStatus()
         }
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     }
   },

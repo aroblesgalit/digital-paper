@@ -86,7 +86,7 @@ export default {
       try {
         await this.logoutUser()
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     async handleDemoLogin () {
@@ -94,7 +94,7 @@ export default {
         await this.demoLogin()
         await this.checkLoginStatus()
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     }
   },

@@ -125,7 +125,7 @@ export default {
           this.$router.push({ name: 'Dashboard' })
         }, 3000)
       } catch (err) {
-        console.error(err)
+        console.error(err.message)
       }
     },
     onCancel () {
