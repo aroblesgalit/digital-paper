@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     ...commentModule.mapActions(['unsetCommentToEdit']),
-    ...postModule.mapActions(['likePost']),
+    ...postModule.mapActions(['likePost', 'unlikePost']),
     toggleComments () {
       this.showComments = !this.showComments
       this.unsetCommentToEdit()
@@ -114,10 +114,17 @@ export default {
     async toggleLike () {
       try {
         if (!this.isAuthenticated) return
-        await this.likePost({
-          postId: this.post._id,
-          userId: this.user._id
-        })
+        if (this.post.likes.includes(this.user._id)) {
+          await this.unlikePost({
+            postId: this.post._id,
+            userId: this.user._id
+          })
+        } else {
+          await this.likePost({
+            postId: this.post._id,
+            userId: this.user._id
+          })
+        }
       } catch (err) {
         console.error(err)
       }
