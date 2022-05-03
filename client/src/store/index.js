@@ -191,6 +191,23 @@ const postModule = {
       } catch (err) {
         console.error(err)
       }
+    },
+    async unlikePost ({ commit, state }, payload) {
+      try {
+        let currentPosts = [...state.publicPosts]
+        const indexOfPost = currentPosts.findIndex(
+          post => post._id === payload.postId
+        )
+        if (!currentPosts[indexOfPost].likes.includes(payload.userId)) return
+        const indexOfLike = currentPosts[indexOfPost].likes.findIndex(
+          user => user === payload.userId
+        )
+        currentPosts[indexOfPost].likes.splice(indexOfLike, 1)
+        commit('SET_PUBLIC_POSTS', currentPosts)
+        await axios.patch(`/api/posts/unlike/${payload.postId}`, payload)
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   getters: {}
