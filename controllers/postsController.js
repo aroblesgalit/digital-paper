@@ -89,5 +89,16 @@ module.exports = {
     )
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
+  },
+  unlikePost: function (req, res) {
+    db.Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: {
+          likes: req.body.userId
+        }
+      },
+      { new: true }
+    )
   }
 }
