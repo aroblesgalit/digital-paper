@@ -18,7 +18,10 @@ router
   .get(postsController.getPostById)
   .patch(postsController.addCommentToPost)
 
-// Match with '/api/posts/likes/:id'
-router.route('/likes/:id').patch(postsController.likePost)
+// Match with '/api/posts/like/:id'
+router.route('/like/:id').patch(postsController.likePost)
+
+// Match with '/api/posts/unline/:id'
+router.route('/unlike/:id').patch(postsController.unlikePost)
 
 module.exports = router
