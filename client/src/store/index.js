@@ -107,13 +107,18 @@ const postModule = {
     publicPosts: [],
     userPosts: [],
     postToEdit: {},
-    updateSuccessful: null
+    updateSuccessful: null,
+    // currentView: [],
+    filter: 'all',
+    sort: 'top'
   },
   mutations: {
     SET_PUBLIC_POSTS: (state, payload) => (state.publicPosts = payload),
     SET_USER_POSTS: (state, payload) => (state.userPosts = payload),
     SET_POST_TO_EDIT: (state, payload) => (state.postToEdit = payload),
-    SET_UPDATE_STAT: (state, payload) => (state.updateSuccessful = payload)
+    SET_UPDATE_STAT: (state, payload) => (state.updateSuccessful = payload),
+    SET_FILTER_BY: (state, payload) => (state.filter = payload),
+    SET_SORT_BY: (state, payload) => (state.sort = payload)
   },
   actions: {
     async getPublicPosts ({ commit }) {
@@ -208,6 +213,12 @@ const postModule = {
       } catch (err) {
         console.error(err.message)
       }
+    },
+    filterBy ({ commit }, payload) {
+      commit('SET_FILTER_BY', payload)
+    },
+    sortBy ({ commit }, payload) {
+      commit('SET_SORT_BY', payload)
     }
   },
   getters: {}
@@ -309,7 +320,15 @@ const commentModule = {
       }
     }
   },
-  getters: {}
+  getters: {
+    currentView (state) {
+      if (state.filter === 'all') {
+        return state.publicPosts
+      } else {
+        return state.publicPosts.filter(post => post.category === state.filter)
+      }
+    }
+  }
 }
 
 export default createStore({
