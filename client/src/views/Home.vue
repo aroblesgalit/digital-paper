@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column align-items-center">
     <ViewOptions />
-    <Post v-for="item in publicPosts" :key="item._id" :post="item" />
+    <Post v-for="item in currentPosts" :key="item._id" :post="item" />
   </div>
 </template>
 
@@ -28,6 +28,7 @@ export default {
   },
   computed: {
     ...userModule.mapGetters(['isAuthenticated']),
+    ...postModule.mapGetters(['currentPosts']),
     ...postModule.mapState(['publicPosts'])
   }
 }

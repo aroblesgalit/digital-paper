@@ -12,7 +12,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            All
+            {{ filter }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="filterDropdown">
             <li><a class="dropdown-item" href="#">All</a></li>
@@ -49,8 +49,14 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const postModule = createNamespacedHelpers('post')
+
 export default {
-  name: 'ViewOptions'
+  name: 'ViewOptions',
+  computed: {
+    ...postModule.mapState(['filter'])
+  }
 }
 </script>
 
@@ -65,5 +71,6 @@ a {
 }
 .nav-link {
   padding: 0;
+  text-transform: capitalize;
 }
 </style>

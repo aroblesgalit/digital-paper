@@ -221,7 +221,15 @@ const postModule = {
       commit('SET_SORT_BY', payload)
     }
   },
-  getters: {}
+  getters: {
+    currentPosts (state) {
+      if (state.filter === 'all') {
+        return state.publicPosts
+      } else {
+        return state.publicPosts.filter(post => post.category === state.filter)
+      }
+    }
+  }
 }
 
 const commentModule = {
@@ -320,15 +328,7 @@ const commentModule = {
       }
     }
   },
-  getters: {
-    currentView (state) {
-      if (state.filter === 'all') {
-        return state.publicPosts
-      } else {
-        return state.publicPosts.filter(post => post.category === state.filter)
-      }
-    }
-  }
+  getters: {}
 }
 
 export default createStore({
