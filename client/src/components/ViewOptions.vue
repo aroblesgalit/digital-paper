@@ -15,11 +15,29 @@
             {{ filter }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-            <li><a class="dropdown-item" href="#">All</a></li>
-            <li><a class="dropdown-item" href="#">Poetry</a></li>
-            <li><a class="dropdown-item" href="#">Story</a></li>
-            <li><a class="dropdown-item" href="#">Journal</a></li>
-            <li><a class="dropdown-item" href="#">Lyrics</a></li>
+            <li>
+              <a class="dropdown-item" href="#" @click="filterBy('all')">All</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" @click="filterBy('poetry')"
+                >Poetry</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" @click="filterBy('story')"
+                >Story</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" @click="filterBy('journal')"
+                >Journal</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" @click="filterBy('lyrics')"
+                >Lyrics</a
+              >
+            </li>
           </ul>
         </li>
       </ul>
@@ -36,11 +54,11 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Top
+            New
           </a>
           <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-            <li><a class="dropdown-item" href="#">Top</a></li>
             <li><a class="dropdown-item" href="#">New</a></li>
+            <li><a class="dropdown-item" href="#">Top</a></li>
           </ul>
         </li>
       </ul>
@@ -54,6 +72,9 @@ const postModule = createNamespacedHelpers('post')
 
 export default {
   name: 'ViewOptions',
+  methods: {
+    ...postModule.mapActions(['filterBy'])
+  },
   computed: {
     ...postModule.mapState(['filter'])
   }

@@ -110,7 +110,7 @@ const postModule = {
     updateSuccessful: null,
     // currentView: [],
     filter: 'all',
-    sort: 'top'
+    sort: 'new'
   },
   mutations: {
     SET_PUBLIC_POSTS: (state, payload) => (state.publicPosts = payload),
