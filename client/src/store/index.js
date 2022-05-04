@@ -224,9 +224,23 @@ const postModule = {
   getters: {
     currentPosts (state) {
       if (state.filter === 'all') {
-        return state.publicPosts
+        if (state.sort === 'new') {
+          return state.publicPosts
+        } else {
+          return state.publicPosts.sort(
+            (a, b) => b.likes.length - a.likes.length
+          )
+        }
       } else {
-        return state.publicPosts.filter(post => post.category === state.filter)
+        if (state.sort === 'new') {
+          return state.publicPosts.filter(
+            post => post.category === state.filter
+          )
+        } else {
+          return state.publicPosts
+            .filter(post => post.category === state.filter)
+            .sort((a, b) => b.likes.length - a.likes.length)
+        }
       }
     }
   }
