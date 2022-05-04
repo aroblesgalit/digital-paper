@@ -54,11 +54,15 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            New
+            {{ sort }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-            <li><a class="dropdown-item" href="#">New</a></li>
-            <li><a class="dropdown-item" href="#">Top</a></li>
+            <li>
+              <a class="dropdown-item" href="#" @click="sortBy('new')">New</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" @click="sortBy('top')">Top</a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -73,10 +77,10 @@ const postModule = createNamespacedHelpers('post')
 export default {
   name: 'ViewOptions',
   methods: {
-    ...postModule.mapActions(['filterBy'])
+    ...postModule.mapActions(['filterBy', 'sortBy'])
   },
   computed: {
-    ...postModule.mapState(['filter'])
+    ...postModule.mapState(['filter', 'sort'])
   }
 }
 </script>
