@@ -109,16 +109,16 @@ const postModule = {
     postToEdit: {},
     updateSuccessful: null,
     // currentView: [],
-    filter: 'all',
-    sort: 'new'
+    filterBy: 'all',
+    sortBy: 'new'
   },
   mutations: {
     SET_PUBLIC_POSTS: (state, payload) => (state.publicPosts = payload),
     SET_USER_POSTS: (state, payload) => (state.userPosts = payload),
     SET_POST_TO_EDIT: (state, payload) => (state.postToEdit = payload),
     SET_UPDATE_STAT: (state, payload) => (state.updateSuccessful = payload),
-    SET_FILTER_BY: (state, payload) => (state.filter = payload),
-    SET_SORT_BY: (state, payload) => (state.sort = payload)
+    SET_FILTER_BY: (state, payload) => (state.filterBy = payload),
+    SET_SORT_BY: (state, payload) => (state.sortBy = payload)
   },
   actions: {
     async getPublicPosts ({ commit }) {
@@ -214,31 +214,30 @@ const postModule = {
         console.error(err.message)
       }
     },
-    filterBy ({ commit }, payload) {
+    setFilterBy ({ commit }, payload) {
       commit('SET_FILTER_BY', payload)
     },
-    sortBy ({ commit }, payload) {
+    setSortBy ({ commit }, payload) {
       commit('SET_SORT_BY', payload)
     }
   },
   getters: {
     currentPosts (state) {
-      if (state.filter === 'all') {
-        if (state.sort === 'new') {
-          return state.publicPosts
+      const copyPublicPosts = [...state.publicPosts]
+      if (state.filterBy === 'all') {
+        if (state.sortBy === 'new') {
+          return copyPublicPosts
         } else {
-          return state.publicPosts.sort(
-            (a, b) => b.likes.length - a.likes.length
-          )
+          return copyPublicPosts.sort((a, b) => b.likes.length - a.likes.length)
         }
       } else {
-        if (state.sort === 'new') {
-          return state.publicPosts.filter(
-            post => post.category === state.filter
+        if (state.sortBy === 'new') {
+          return copyPublicPosts.filter(
+            post => post.category === state.filterBy
           )
         } else {
-          return state.publicPosts
-            .filter(post => post.category === state.filter)
+          return copyPublicPosts
+            .filter(post => post.category === state.filterBy)
             .sort((a, b) => b.likes.length - a.likes.length)
         }
       }

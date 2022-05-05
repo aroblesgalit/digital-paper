@@ -12,29 +12,31 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {{ filter }}
+            {{ filterBy }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="filterDropdown">
             <li>
-              <a class="dropdown-item" href="#" @click="filterBy('all')">All</a>
+              <a class="dropdown-item" href="#" @click="setFilterBy('all')"
+                >All</a
+              >
             </li>
             <li>
-              <a class="dropdown-item" href="#" @click="filterBy('poetry')"
+              <a class="dropdown-item" href="#" @click="setFilterBy('poetry')"
                 >Poetry</a
               >
             </li>
             <li>
-              <a class="dropdown-item" href="#" @click="filterBy('story')"
+              <a class="dropdown-item" href="#" @click="setFilterBy('story')"
                 >Story</a
               >
             </li>
             <li>
-              <a class="dropdown-item" href="#" @click="filterBy('journal')"
+              <a class="dropdown-item" href="#" @click="setFilterBy('journal')"
                 >Journal</a
               >
             </li>
             <li>
-              <a class="dropdown-item" href="#" @click="filterBy('lyrics')"
+              <a class="dropdown-item" href="#" @click="setFilterBy('lyrics')"
                 >Lyrics</a
               >
             </li>
@@ -54,14 +56,18 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {{ sort }}
+            {{ sortBy }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="sortDropdown">
             <li>
-              <a class="dropdown-item" href="#" @click="sortBy('new')">New</a>
+              <a class="dropdown-item" href="#" @click="setSortBy('new')"
+                >New</a
+              >
             </li>
             <li>
-              <a class="dropdown-item" href="#" @click="sortBy('top')">Top</a>
+              <a class="dropdown-item" href="#" @click="setSortBy('top')"
+                >Top</a
+              >
             </li>
           </ul>
         </li>
@@ -77,11 +83,10 @@ const postModule = createNamespacedHelpers('post')
 export default {
   name: 'ViewOptions',
   methods: {
-    ...postModule.mapActions(['filterBy', 'sortBy'])
+    ...postModule.mapActions(['setFilterBy', 'setSortBy'])
   },
   computed: {
-    // >>>>>>>>>> ISSUE: Sort only works once <<<<<<<<<<<
-    ...postModule.mapState(['filter', 'sort'])
+    ...postModule.mapState(['filterBy', 'sortBy'])
   }
 }
 </script>
