@@ -80,6 +80,7 @@ export default {
     ...postModule.mapActions(['filterBy', 'sortBy'])
   },
   computed: {
+    // >>>>>>>>>> ISSUE: Sort only works once <<<<<<<<<<<
     ...postModule.mapState(['filter', 'sort'])
   }
 }
