@@ -13,7 +13,7 @@
             >
           </li>
           <li v-if="isAuthenticated" class="nav-item">
-            <router-link class="nav-link" to="/">Favorites</router-link>
+            <router-link class="nav-link" to="/favorites">Favorites</router-link>
           </li>
           <!-- <li v-if="isAuthenticated" class="nav-item">
             <router-link class="nav-link" to="/profile">Profile</router-link>
