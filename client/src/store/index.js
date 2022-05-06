@@ -242,10 +242,10 @@ const postModule = {
         }
       }
     },
-    userLikedPosts ({ state, rootState }) {
+    userLikedPosts (state, getters, rootState) {
       const copyPublicPosts = [...state.publicPosts]
       return copyPublicPosts.filter(post =>
-        post.likes.includes(rootState.user._id)
+        post.likes.includes(rootState.user.user._id)
       )
     }
   }
