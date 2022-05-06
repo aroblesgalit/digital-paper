@@ -241,6 +241,12 @@ const postModule = {
             .sort((a, b) => b.likes.length - a.likes.length)
         }
       }
+    },
+    userLikedPosts ({ state, rootState }) {
+      const copyPublicPosts = [...state.publicPosts]
+      return copyPublicPosts.filter(post =>
+        post.likes.includes(rootState.user._id)
+      )
     }
   }
 }
