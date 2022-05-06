@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import EditPost from '../views/EditPost.vue'
 import Profile from '../views/Profile.vue'
+import Favorites from '../views/Favorites.vue'
 import store from '../store'
 
 const routes = [
@@ -49,6 +50,14 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+    meta: {
+      authRequired: true
+    }
+  },
+  {
+    path: '/favorites',
+    name: 'Favorites',
+    component: Favorites,
     meta: {
       authRequired: true
     }
