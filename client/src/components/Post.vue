@@ -180,7 +180,11 @@ export default {
 .card .header img {
   height: 42px;
   width: 42px;
+  max-height: 42px;
+  max-width: 42px;
   border-radius: 50%;
+  font-size: 0.7rem;
+  line-height: 1;
 }
 .card .header .avatar {
   height: 42px;
