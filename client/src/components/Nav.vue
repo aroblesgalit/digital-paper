@@ -13,7 +13,9 @@
             >
           </li>
           <li v-if="isAuthenticated" class="nav-item">
-            <router-link class="nav-link" to="/favorites">Favorites</router-link>
+            <router-link class="nav-link" to="/favorites"
+              >Favorites</router-link
+            >
           </li>
           <!-- <li v-if="isAuthenticated" class="nav-item">
             <router-link class="nav-link" to="/profile">Profile</router-link>
@@ -52,7 +54,10 @@
                 }}
               </div>
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdown"
+            >
               <li>
                 <router-link class="dropdown-item" to="/profile"
                   >Profile</router-link
@@ -122,8 +127,5 @@ img {
   color: #ffffff;
   font-size: 80px;
   overflow: hidden;
-}
-.dropdown-menu {
-  right: 0;
 }
 </style>
