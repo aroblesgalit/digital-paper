@@ -2,7 +2,18 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">Digital Paper</router-link>
-      <div>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li v-if="!isAuthenticated" class="nav-item">
             <router-link class="nav-link" to="/register">Register</router-link>
@@ -35,7 +46,7 @@
           </li> -->
           <li
             v-if="isAuthenticated"
-            class="nav-item dropdown d-flex align-items-center"
+            class="nav-item dropdown desktop-dropdown d-flex align-items-center"
           >
             <a
               href="#"
@@ -69,6 +80,12 @@
                 >
               </li>
             </ul>
+          </li>
+          <li v-if="isAuthenticated" class="nav-item mobile-nav-item">
+            <router-link class="nav-link" to="/profile">Profile</router-link>
+          </li>
+          <li v-if="isAuthenticated" class="nav-item mobile-nav-item">
+            <a class="nav-link" @click="handleLogout" href="#">Logout</a>
           </li>
           <li v-if="!isAuthenticated" class="nav-item">
             <a href="#" class="nav-link" @click="handleDemoLogin">Demo login</a>
@@ -111,6 +128,9 @@ export default {
 </script>
 
 <style scoped>
+.navbar-collapse {
+  flex-grow: 0;
+}
 img {
   height: 32px;
   width: 32px;
@@ -127,5 +147,19 @@ img {
   color: #ffffff;
   font-size: 80px;
   overflow: hidden;
+}
+.desktop-dropdown {
+  display: none !important;
+}
+.mobile-nav-item {
+  display: block;
+}
+@media (min-width: 768px) {
+  .desktop-dropdown {
+    display: flex !important;
+  }
+  .mobile-nav-item {
+    display: none;
+  }
 }
 </style>
