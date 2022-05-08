@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex flex-column align-items-center">
-    <div class="card mw-100 mb-3">
+  <div class="wrapper d-flex flex-column align-items-center">
+    <div class="card mb-3">
       <div class="card-body">
         <h1 class="card-title h3 mb-3 fw-normal text-center">Login</h1>
         <form @submit.prevent="formSubmit" class="d-flex flex-column">
@@ -69,6 +69,16 @@ export default {
 
 <style scoped>
 .card {
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 16px;
+}
+.wrapper {
+  padding: 0 16px;
+}
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 0;
+  }
 }
 </style>
