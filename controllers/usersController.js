@@ -23,11 +23,15 @@ module.exports = {
       lastName: req.user.lastName
     })
   },
-  logoutUser: function (req, res) {
-    req.logout()
-    req.session.destroy(function (err) {
-      res.json({})
-    })
+  logoutUser: function (req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err) }
+
+      req.session.destroy(function (err) {
+        res.json({})
+      })
+    });
+    
   },
   fetchAuthUser: function (req, res) {
     if (!req.user) {
